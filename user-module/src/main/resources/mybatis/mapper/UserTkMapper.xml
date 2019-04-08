@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.usermodule.infrastructure.mapper.UserTkMapper">
+  <resultMap id="BaseResultMap" type="top.godder.usermodule.domain.entity.UserTk">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="userPs" jdbcType="VARCHAR" property="userPs" />
+  </resultMap>
+    <select id="findUserTkByUserName" parameterType="java.lang.String" resultType="UserTk">
+    select * from user_tk where user_name = #{userName};
+    </select>
+    <insert id="addUserTk" parameterType="UserTk">
+    insert into user_tk (user_name, user_ps) values (#{userName, jdbcType=VARCHAR}, #{userPs, jdbcType=VARCHAR})
+    </insert>
+    <update id="updateUserTk" parameterType="UserTk">
+    update user_tk set user_ps = #{userPs, jdbcType=VARCHAR} where id = #{id} and user_name = #{userName}
+    </update>
+    <delete id="deleteUserTk" parameterType="UserTk">
+        delete from user_tk where id = #{id, jdbcType=BIGINT} and user_name = #{userName, jdbcType=VARCHAR} and user_ps = #{userPs, jdbcType=VARCHAR};
+    </delete>
+</mapper>

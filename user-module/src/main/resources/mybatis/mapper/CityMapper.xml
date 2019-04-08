@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.usermodule.infrastructure.mapper.CityMapper">
+  <resultMap id="BaseResultMap" type="top.godder.usermodule.domain.entity.City">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+    <select id="findCityById" parameterType="java.lang.Integer" resultType="City">
+      select *
+      from city
+      where city_id = #{id};
+    </select>
+    <select id="findAllCity" resultType="City">
+        select *
+        from city;
+    </select>
+    <select id="findCityByProvinceId" parameterType="java.lang.Integer" resultType="City">
+        select * from city where province_id = #{id}
+    </select>
+    <insert id="addCity" parameterType="City">
+        insert into city (name, province_id, comment)
+        values (
+        #{name, jdbcType=VARCHAR}, #{provinceId, jdbcType=INTEGER}, #{comment, jdbcType=VARCHAR}
+               )
+    </insert>
+    <update id="updateCity" parameterType="City">
+        update city
+        <set>
+            <if test="record.name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.provinceId != null">
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="record.comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where city_id = #{cityId}
+    </update>
+    <delete id="deleteCity" parameterType="java.lang.Integer">
+        delete from city where city_id = #{id};
+    </delete>
+</mapper>

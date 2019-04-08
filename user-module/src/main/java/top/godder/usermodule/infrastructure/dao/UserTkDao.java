@@ -1,0 +1,17 @@
+package top.godder.usermodule.infrastructure.dao;
+
+import top.godder.usermodule.domain.entity.UserTk;
+
+/**
+ * @author: godder
+ * @date: 2019/3/27
+ */
+public interface UserTkDao {
+    UserTk findUserTkByUserName(String userName);
+
+    boolean addUserTk(UserTk userTk);
+
+    Integer updateUserTk(UserTk userTk);
+
+    Integer deleteUserTk(UserTk userTk);
+}

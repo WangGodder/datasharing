@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.usermodule.infrastructure.mapper.ProvinceMapper">
+  <resultMap id="BaseResultMap" type="top.godder.usermodule.domain.entity.Province">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+  <select id="findProvinceById" parameterType="java.lang.Integer" resultType="Province">
+    select * from province where province_id = #{id}
+  </select>
+  <select id="findAllProvince" resultType="Province">
+    select * from province
+  </select>
+  <insert id="addProvince" parameterType="Province">
+    insert into province (name, comment) values (#{name, jdbcType=VARCHAR}, #{comment, jdbcType=VARCHAR})
+  </insert>
+  <update id="updateProvince" parameterType="Province">
+    update province
+    <set>
+      <if test="name != null and name != ''">name = #{name, jdbcType=VARCHAR}</if>
+      <if test="comment != null">comment = #{comment, jdbcType=VARCHAR}</if>
+    </set>
+    where province_id = #{provinceId}
+  </update>
+  <delete id="deleteProvince" parameterType="java.lang.Integer">
+    delete from province where province_id = #{id}
+  </delete>
+</mapper>
