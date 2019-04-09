@@ -19,7 +19,7 @@
   <select id="findAllUserInfo" resultType="UserInfo">
     select * from user_info;
   </select>
-  <select id="findUserInfoByReq" parameterType="top.godder.userapi.request.UserInfoReq" resultType="UserInfo">
+  <select id="findUserInfoByReq" parameterType="top.godder.usermodule.domain.vo.UserInfoReq" resultType="UserInfo">
     select * from user_info
     <where>
       <if test="company != null and company != ''">

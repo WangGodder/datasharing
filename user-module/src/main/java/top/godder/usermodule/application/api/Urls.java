@@ -44,6 +44,5 @@ public class Urls {
 
     public static class LoginUserApiUrl {
         public static final String GET_LOGIN_USER = "/user/loginUser";
-        public static final String GET_ALL_LOGIN_USER = "/user/allLoginUser";
     }
 }

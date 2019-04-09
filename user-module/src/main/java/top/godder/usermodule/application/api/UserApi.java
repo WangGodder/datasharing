@@ -40,6 +40,4 @@ public interface UserApi {
     @RequestMapping(value = Urls.LoginUserApiUrl.GET_LOGIN_USER, method = POST)
     LoginUser getLoginUser(@RequestBody Long userId);
 
-    @RequestMapping(value = Urls.LoginUserApiUrl.GET_ALL_LOGIN_USER, method = GET)
-    List<LoginUser> getAllLoginUser();
 }
