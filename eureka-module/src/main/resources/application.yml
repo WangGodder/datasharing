@@ -13,3 +13,10 @@ eureka:
 spring:
   application:
     name: eureka-service
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: godder
+    password: godder

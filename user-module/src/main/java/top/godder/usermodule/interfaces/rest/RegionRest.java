@@ -1,11 +1,13 @@
 package top.godder.usermodule.interfaces.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.godder.usermodule.application.api.RegionApi;
 import top.godder.usermodule.application.service.RegionService;
 import top.godder.usermodule.domain.entity.City;
 import top.godder.usermodule.domain.entity.Province;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class RegionRest implements RegionApi {
         return service.deleteProvince(id);
     }
 
+    @RequestMapping(value = Urls.CityApiUrl.GET_CITY, method = POST)
     @Override
     public City findCityById(Integer id) {
         return service.findCityById(id);

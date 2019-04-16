@@ -1,20 +1,15 @@
-package top.godder.usermodule.domain.entity;
+package top.godder.usermoduleapi.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
 import java.util.Objects;
 
 /**
- * @author Godder
+ * @author: godder
+ * @date: 2019/4/15
  */
-@Getter
-@NoArgsConstructor
-@Table(name = "user_info")
+@Data
 public class UserInfo {
-    @Column(name = "user_id")
     private Long userId;
 
     /**
@@ -43,16 +38,6 @@ public class UserInfo {
      * 自我介绍
      */
     private String introduce;
-
-    public UserInfo(Long userId, String company, Integer provinceId, Integer cityId, String gender, Integer age, String introduce) {
-        this.userId = userId;
-        this.company = company;
-        this.provinceId = provinceId;
-        this.cityId = cityId;
-        this.gender = gender;
-        this.age = age;
-        this.introduce = introduce;
-    }
 
     @Override
     public boolean equals(Object o) {

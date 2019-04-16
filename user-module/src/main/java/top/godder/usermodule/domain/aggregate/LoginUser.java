@@ -1,4 +1,4 @@
-package top.godder.usermodule.domain.aggregates;
+package top.godder.usermodule.domain.aggregate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

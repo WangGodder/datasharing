@@ -1,11 +1,11 @@
-package top.godder.usermodule.application.api;
+package top.godder.usermoduleapi.service;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import top.godder.usermodule.domain.aggregate.LoginUser;
-import top.godder.usermodule.domain.entity.UserInfo;
-import top.godder.usermodule.domain.vo.UserInfoReq;
+import top.godder.usermoduleapi.dto.LoginUser;
+import top.godder.usermoduleapi.dto.UserInfo;
+import top.godder.usermoduleapi.vo.UserInfoReq;
 
 import java.util.List;
 

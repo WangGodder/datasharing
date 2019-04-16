@@ -29,5 +29,5 @@ properties:
       password: 970701wxz
 
 service:
-  service-user: http://127.0.0.1:8801
-  service-data: http://127.0.0.1:8802
+  service-user: http://127.0.0.1:8810
+  service-data: http://127.0.0.1:8820

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
+/**
+ * @author Godder
+ */
 @Getter
 @NoArgsConstructor
 @Table(name = "province")

@@ -1,7 +1,7 @@
-package top.godder.usermodule.domain.factories;
+package top.godder.usermodule.domain.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import top.godder.usermodule.domain.aggregates.LoginUser;
+import top.godder.usermodule.domain.aggregate.LoginUser;
 import top.godder.usermodule.domain.entity.City;
 import top.godder.usermodule.domain.entity.Province;
 import top.godder.usermodule.domain.entity.UserInfo;

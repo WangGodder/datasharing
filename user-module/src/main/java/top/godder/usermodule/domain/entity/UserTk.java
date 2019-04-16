@@ -1,6 +1,5 @@
 package top.godder.usermodule.domain.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import top.godder.usermodule.infrastructure.util.MD5;
@@ -9,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
+/**
+ * @author Godder
+ */
 @Getter
 @NoArgsConstructor
 @Table(name = "user_tk")

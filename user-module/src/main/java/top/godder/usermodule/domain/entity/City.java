@@ -1,15 +1,16 @@
 package top.godder.usermodule.domain.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
+/**
+ * @author Godder
+ */
 @Getter
 @NoArgsConstructor
 @Table(name = "city")
@@ -43,8 +44,12 @@ public class City {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         City city = (City) o;
         return Objects.equals(cityId, city.cityId) &&
                 Objects.equals(provinceId, city.provinceId);

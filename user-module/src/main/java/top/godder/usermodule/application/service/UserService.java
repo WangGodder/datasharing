@@ -2,9 +2,9 @@ package top.godder.usermodule.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.godder.usermodule.domain.aggregates.LoginUser;
+import top.godder.usermodule.domain.aggregate.LoginUser;
 import top.godder.usermodule.domain.entity.UserInfo;
-import top.godder.usermodule.domain.factories.LoginUserFactory;
+import top.godder.usermodule.domain.factory.LoginUserFactory;
 import top.godder.usermodule.domain.repository.UserInfoRepository;
 import top.godder.usermodule.domain.vo.UserInfoReq;
 
