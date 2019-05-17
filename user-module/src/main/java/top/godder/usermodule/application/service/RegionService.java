@@ -2,10 +2,11 @@ package top.godder.usermodule.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.godder.usermodule.domain.entity.City;
-import top.godder.usermodule.domain.entity.Province;
+import top.godder.usermoduleapi.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.Province;
 import top.godder.usermodule.domain.repository.CityRepository;
 import top.godder.usermodule.domain.repository.ProvinceRepository;
+import top.godder.usermoduleapi.domain.entity.City;
 
 import java.util.ArrayList;
 import java.util.List;

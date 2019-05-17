@@ -1,4 +1,4 @@
-package top.godder.usermodule.domain.entity;
+package top.godder.usermoduleapi.domain.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

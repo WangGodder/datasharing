@@ -1,11 +1,9 @@
-package top.godder.usermodule.domain.entity;
+package top.godder.usermoduleapi.domain.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import top.godder.usermodule.infrastructure.util.MD5;
+import top.godder.infrastructurecommon.util.MD5;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -13,9 +11,7 @@ import java.util.Objects;
  */
 @Getter
 @NoArgsConstructor
-@Table(name = "user_tk")
 public class UserTk {
-    @Id
     private Long id;
 
     private String userName;

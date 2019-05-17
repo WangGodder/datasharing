@@ -1,11 +1,8 @@
-package top.godder.usermodule.domain.entity;
+package top.godder.usermoduleapi.domain.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -13,10 +10,7 @@ import java.util.Objects;
  */
 @Getter
 @NoArgsConstructor
-@Table(name = "province")
 public class Province {
-    @Id
-    @Column(name = "province_id")
     private Integer provinceId;
 
     /**
@@ -37,8 +31,12 @@ public class Province {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Province province = (Province) o;
         return Objects.equals(provinceId, province.provinceId);
     }

@@ -3,10 +3,12 @@ package top.godder.usermodule.interfaces.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.godder.usermodule.application.api.RegionApi;
 import top.godder.usermodule.application.service.RegionService;
-import top.godder.usermodule.domain.entity.City;
-import top.godder.usermodule.domain.entity.Province;
+import top.godder.usermoduleapi.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.Province;
+import top.godder.usermoduleapi.domain.entity.City;
+import top.godder.usermoduleapi.service.RegionApi;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;

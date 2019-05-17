@@ -2,7 +2,7 @@ package top.godder.usermodule.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.godder.usermodule.domain.entity.UserTk;
+import top.godder.usermoduleapi.domain.entity.UserTk;
 import top.godder.usermodule.domain.repository.UserTkRepository;
 
 import java.util.Map;

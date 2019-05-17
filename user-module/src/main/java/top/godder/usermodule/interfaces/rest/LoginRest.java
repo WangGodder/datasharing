@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.godder.usermodule.application.api.Urls;
-import top.godder.usermodule.application.api.LoginApi;
 import top.godder.usermodule.application.service.LoginService;
-import top.godder.usermodule.domain.entity.UserTk;
+import top.godder.usermoduleapi.domain.entity.UserTk;
+import top.godder.usermoduleapi.service.LoginApi;
 
 import java.util.Map;
 

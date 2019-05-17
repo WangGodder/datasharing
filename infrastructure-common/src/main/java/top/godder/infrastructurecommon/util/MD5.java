@@ -1,4 +1,4 @@
-package top.godder.usermodule.infrastructure.util;
+package top.godder.infrastructurecommon.util;
 
 import org.springframework.util.DigestUtils;
 

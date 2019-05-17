@@ -1,11 +1,11 @@
-package top.godder.usermodule.domain.aggregate;
+package top.godder.usermoduleapi.domain.aggregate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import top.godder.usermodule.domain.entity.City;
-import top.godder.usermodule.domain.entity.Province;
-import top.godder.usermodule.domain.entity.UserInfo;
+import top.godder.usermoduleapi.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.Province;
+import top.godder.usermoduleapi.domain.entity.UserInfo;
 
 /**
  * @author: godder

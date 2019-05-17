@@ -1,10 +1,10 @@
 package top.godder.usermodule.domain.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import top.godder.usermodule.domain.aggregate.LoginUser;
-import top.godder.usermodule.domain.entity.City;
-import top.godder.usermodule.domain.entity.Province;
-import top.godder.usermodule.domain.entity.UserInfo;
+import top.godder.usermoduleapi.domain.aggregate.LoginUser;
+import top.godder.usermoduleapi.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.Province;
+import top.godder.usermoduleapi.domain.entity.UserInfo;
 import top.godder.usermodule.infrastructure.dao.CityDao;
 import top.godder.usermodule.infrastructure.dao.ProvinceDao;
 import top.godder.usermodule.infrastructure.dao.UserInfoDao;

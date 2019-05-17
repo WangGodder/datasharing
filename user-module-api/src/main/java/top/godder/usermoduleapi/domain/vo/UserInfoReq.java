@@ -1,4 +1,4 @@
-package top.godder.usermoduleapi.vo;
+package top.godder.usermoduleapi.domain.vo;
 
 import lombok.Data;
 

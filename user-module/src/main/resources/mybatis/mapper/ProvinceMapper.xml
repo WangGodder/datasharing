@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.godder.usermodule.infrastructure.mapper.ProvinceMapper">
-  <resultMap id="BaseResultMap" type="top.godder.usermodule.domain.entity.Province">
+  <resultMap id="BaseResultMap" type="top.godder.usermoduleapi.domain.entity.Province">
     <!--
       WARNING - @mbg.generated
     -->

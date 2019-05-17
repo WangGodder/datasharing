@@ -1,6 +1,7 @@
 package top.godder.usermodule.infrastructure.dao;
 
-import top.godder.usermodule.domain.entity.UserTk;
+
+import top.godder.usermoduleapi.domain.entity.UserTk;
 
 /**
  * @author: godder

@@ -2,7 +2,7 @@ package top.godder.usermodule.domain.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import top.godder.usermodule.domain.entity.Province;
+import top.godder.usermoduleapi.domain.entity.Province;
 import top.godder.usermodule.infrastructure.dao.ProvinceDao;
 
 import java.util.List;

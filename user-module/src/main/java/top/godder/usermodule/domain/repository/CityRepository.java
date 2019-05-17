@@ -2,8 +2,9 @@ package top.godder.usermodule.domain.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import top.godder.usermodule.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.City;
 import top.godder.usermodule.infrastructure.dao.CityDao;
+import top.godder.usermoduleapi.domain.entity.City;
 
 import java.util.ArrayList;
 import java.util.List;

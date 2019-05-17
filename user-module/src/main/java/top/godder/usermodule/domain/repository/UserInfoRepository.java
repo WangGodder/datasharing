@@ -2,9 +2,9 @@ package top.godder.usermodule.domain.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import top.godder.usermodule.domain.entity.UserInfo;
-import top.godder.usermodule.domain.vo.UserInfoReq;
+import top.godder.usermoduleapi.domain.entity.UserInfo;
 import top.godder.usermodule.infrastructure.dao.UserInfoDao;
+import top.godder.usermoduleapi.domain.vo.UserInfoReq;
 
 import java.util.ArrayList;
 import java.util.List;

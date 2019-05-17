@@ -3,9 +3,10 @@ package top.godder.usermodule.domain.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import top.godder.infrastructurecommon.util.DIUtil;
-import top.godder.usermodule.domain.entity.UserTk;
+import top.godder.infrastructurecommon.util.MD5;
+import top.godder.usermoduleapi.domain.entity.UserTk;
 import top.godder.usermodule.infrastructure.dao.UserTkDao;
-import top.godder.usermodule.infrastructure.util.MD5;
+
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -22,16 +23,16 @@ public class UserTkRepository {
     public Long getUserId(UserTk userTk) {
         // 空值检测,减少无效数据库访问
         if (userTk == null || userTk.getUserName() == null || userTk.getUserPs() == null) {
-            return -1l;
+            return -1L;
         }
         if (userTk.getUserName().isEmpty() || userTk.getUserPs().isEmpty()) {
-            return -1l;
+            return -1L;
         }
         UserTk findUserTk = userTkDao.findUserTkByUserName(userTk.getUserName());
         if (userTk.verify(findUserTk)) {
             return findUserTk.getId();
         }
-        return -1l;
+        return -1L;
     }
 
     public boolean register(UserTk userTk) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.godder.usermodule.infrastructure.mapper.CityMapper">
-  <resultMap id="BaseResultMap" type="top.godder.usermodule.domain.entity.City">
+  <resultMap id="BaseResultMap" type="top.godder.usermoduleapi.domain.entity.City">
     <!--
       WARNING - @mbg.generated
     -->
@@ -15,7 +15,7 @@
       from city
       where city_id = #{id};
     </select>
-    <select id="findAllCity" resultType="City">
+    <select id="findAllCity" resultMap="BaseResultMap">
         select *
         from city;
     </select>

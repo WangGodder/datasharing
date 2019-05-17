@@ -3,8 +3,8 @@ package top.godder.usermoduleapi.service;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import top.godder.usermoduleapi.dto.City;
-import top.godder.usermoduleapi.dto.Province;
+import top.godder.usermoduleapi.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.Province;
 
 import java.util.List;
 

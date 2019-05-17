@@ -2,7 +2,7 @@ package top.godder.usermodule.infrastructure.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.godder.usermodule.domain.entity.UserTk;
+import top.godder.usermoduleapi.domain.entity.UserTk;
 import top.godder.usermodule.infrastructure.dao.UserTkDao;
 import top.godder.usermodule.infrastructure.mapper.UserTkMapper;
 

@@ -1,6 +1,6 @@
 package top.godder.usermodule.infrastructure.dao;
 
-import top.godder.usermodule.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.City;
 
 import java.util.List;
 

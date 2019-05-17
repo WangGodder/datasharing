@@ -2,9 +2,10 @@ package top.godder.usermodule.infrastructure.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.godder.usermodule.domain.entity.City;
+import top.godder.usermoduleapi.domain.entity.City;
 import top.godder.usermodule.infrastructure.dao.CityDao;
 import top.godder.usermodule.infrastructure.mapper.CityMapper;
+import top.godder.usermoduleapi.domain.entity.City;
 
 
 import java.util.List;

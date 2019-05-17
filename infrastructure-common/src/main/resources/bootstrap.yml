@@ -5,11 +5,12 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8800/eureka/
+      defaultZone: http://localhost:8800/eureka/
 
 security:
   basic:
     enabled: false
+
 
 #----------------------------------------------------------------------------
 # 配置参数
@@ -31,3 +32,18 @@ properties:
 service:
   service-user: http://127.0.0.1:8810
   service-data: http://127.0.0.1:8820
+spring:
+  redis:
+    host: localhost
+    port: 6379
+#    连接超时时间
+    timeout: 10000
+    pool:
+#      连接池最大空闲链接
+      max-idle: 100
+      max-active: 1000
+#      连接池最小空闲链接
+      min-idle: 2
+#      最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: 1000
+

@@ -2,11 +2,11 @@ package top.godder.usermodule.interfaces.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import top.godder.usermodule.application.api.UserApi;
 import top.godder.usermodule.application.service.UserService;
-import top.godder.usermodule.domain.aggregate.LoginUser;
-import top.godder.usermodule.domain.entity.UserInfo;
-import top.godder.usermodule.domain.vo.UserInfoReq;
+import top.godder.usermoduleapi.domain.aggregate.LoginUser;
+import top.godder.usermoduleapi.domain.entity.UserInfo;
+import top.godder.usermoduleapi.domain.vo.UserInfoReq;
+import top.godder.usermoduleapi.service.UserApi;
 
 import java.util.List;
 

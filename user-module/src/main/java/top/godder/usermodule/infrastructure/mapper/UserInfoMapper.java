@@ -1,8 +1,8 @@
 package top.godder.usermodule.infrastructure.mapper;
 
 import top.godder.infrastructurecommon.database.BaseMapper;
-import top.godder.usermodule.domain.entity.UserInfo;
-import top.godder.usermodule.domain.vo.UserInfoReq;
+import top.godder.usermoduleapi.domain.entity.UserInfo;
+import top.godder.usermoduleapi.domain.vo.UserInfoReq;
 
 
 import java.util.List;
