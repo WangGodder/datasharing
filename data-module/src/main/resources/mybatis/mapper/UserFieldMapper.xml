@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.dataservice.mapper.UserFieldMapper">
+  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.UserField">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="field_id" jdbcType="BIGINT" property="fieldId" />
+  </resultMap>
+    <select id="findFieldByUser" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select field_id from user_field where user_id = #{id}
+    </select>
+    <select id="findUserByField" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select user_id from user_field where field_id = #{id}
+    </select>
+    <insert id="addUserField" parameterType="UserField">
+        insert into user_field values (#{userId, jdbcType=BIGINT}, #{fieldId, jdbcType=BIGINT});
+    </insert>
+    <delete id="deleteUserField" parameterType="UserField">
+        delete from user_field where user_id = #{userId} and field_id = #{fieldId}
+    </delete>
+</mapper>

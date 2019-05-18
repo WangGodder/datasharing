@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.dataservice.mapper.QuestionMapper">
+  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.Question">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="question_id" jdbcType="BIGINT" property="answerId" />
+    <result column="question_name" jdbcType="VARCHAR" property="questionName" />
+    <result column="question_description" jdbcType="VARCHAR" property="questionDescription" />
+    <result column="question_credit" jdbcType="INTEGER" property="questionCredit" />
+    <result column="quiz_user" jdbcType="BIGINT" property="quizUser" />
+      <result column="field_id" jdbcType="BIGINT" property="fieldId" />
+      <result column="file_id" jdbcType="VARCHAR" property="fileId" />
+  </resultMap>
+    <select id="findQuestionById" parameterType="java.lang.Long" resultType="Question">
+        select * from question where question_id = #{id}
+    </select>
+    <select id="findAllQuestion" resultType="Question">
+        select * from question
+    </select>
+    <select id="findQuestionByReq" parameterType="top.godder.dataapi.request.QuestionReq" resultType="Question">
+        select * from question
+        <where>
+            <if test="questionName != null and questionName != ''">and question_name = #{questionName}</if>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="fieldId != null">and field_id = #{fieldId}</if>
+            <if test="fileId != null and fileId != ''">and file_id = #{fileId}</if>
+        </where>
+    </select>
+    <insert id="addQuestion" parameterType="Question">
+        insert into question (question_name, question_description, question_credit, quiz_user, field_id, file_id)
+        VALUES (
+                   question_name = #{questionName, jdbcType=VARCHAR}, question_description = #{questionDescription, jdbcType=VARCHAR},
+                   question_credit = #{questionCredit, jdbcType=INTEGER}, quiz_user = #{quizUser, jdbcType=BIGINT},
+                   field_id = #{fieldId, jdbcType=BIGINT}, file_id = #{fileId, jdbcType=VARCHAR}
+                   )
+    </insert>
+    <update id="updateQuestion" parameterType="Question">
+        update question
+        <set>
+            <if test="questionName != null">
+                question_name = #{questionName,jdbcType=VARCHAR},
+            </if>
+            <if test="questionDescription != null">
+                question_description = #{questionDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="questionCredit != null">
+                question_credit = #{questionCredit,jdbcType=INTEGER},
+            </if>
+            <if test="quizUser != null">
+                quiz_user = #{quizUser,jdbcType=BIGINT},
+            </if>
+            <if test="fieldId != null">
+                field_id = #{fieldId,jdbcType=BIGINT},
+            </if>
+            <if test="fileId != null">
+                file_id = #{fileId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where question_id = #{answerId, jdbcType=BIGINT}
+    </update>
+    <delete id="deleteQuestion" parameterType="java.lang.Long">
+        delete from question where question_id = #{id}
+    </delete>
+</mapper>

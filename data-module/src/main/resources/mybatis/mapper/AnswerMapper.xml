@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.dataservice.mapper.AnswerMapper">
+  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.Answer">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="answer_id" jdbcType="BIGINT" property="answerId" />
+    <result column="question_id" jdbcType="BIGINT" property="answerId" />
+    <result column="answer_user" jdbcType="BIGINT" property="answerUser" />
+    <result column="answer_file_name" jdbcType="VARCHAR" property="answerFileName" />
+    <result column="answer_content" jdbcType="VARCHAR" property="answerContent" />
+    <result column="answer_date" jdbcType="TIMESTAMP" property="answerDate" />
+  </resultMap>
+</mapper>

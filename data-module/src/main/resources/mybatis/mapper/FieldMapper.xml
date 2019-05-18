@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.godder.dataservice.mapper.FieldMapper">
+  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.Field">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="field_id" jdbcType="BIGINT" property="fieldId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="field_level" jdbcType="INTEGER" property="fieldLevel" />
+    <result column="sub_fields" jdbcType="VARCHAR" property="subFields" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+  </resultMap>
+</mapper>
