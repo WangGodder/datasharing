@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.AnswerEvaluateMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.AnswerEvaluate">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.AnswerEvaluateMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.AnswerEvaluate">
     <!--
       WARNING - @mbg.generated
     -->
@@ -9,4 +9,23 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="answer_level" jdbcType="INTEGER" property="answerLevel" />
   </resultMap>
+  <select id="findLevelAnswerId" parameterType="java.lang.Long" resultType="float">
+    select avg(answer_level) from answer_evaluate where answer_id = #{answerId,jdbcType=BIGINT}
+  </select>
+  <select id="countByAnswerId" parameterType="java.lang.Long" resultType="integer">
+    select count(*) from answer_evaluate where answer_id = #{answerId,jdbcType=BIGINT}
+  </select>
+  <select id="countByUserId" parameterType="long" resultType="integer">
+    select count(*) from answer_evaluate where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.AnswerEvaluate">
+    insert into answer_evaluate (answer_id, user_id, answer_level)
+    values (#{answerId,jdbcType=BIGINT} ,#{userId,jdbcType=BIGINT} ,#{answerLevel,jdbcType=INTEGER} )
+  </insert>
+  <delete id="deleteByAnswerId" parameterType="java.lang.Long">
+    delete from answer_evaluate where answer_id = #{answerId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByUserId" parameterType="java.lang.Long">
+    delete from answer_evaluate where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
 </mapper>

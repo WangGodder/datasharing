@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.FieldMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.Field">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.FieldMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.Field">
     <!--
       WARNING - @mbg.generated
     -->
@@ -11,4 +11,50 @@
     <result column="sub_fields" jdbcType="VARCHAR" property="subFields" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
   </resultMap>
+  <select id="findByFieldId" parameterType="long" resultMap="BaseResultMap">
+    select * from field where field_id = #{fieldId,jdbcType=BIGINT}
+  </select>
+  <select id="findByFieldLevel" parameterType="int" resultMap="BaseResultMap">
+    select * from field where field_level = #{level,jdbcType=INTEGER}
+  </select>
+  <select id="findByParentFields" parameterType="long" resultMap="BaseResultMap">
+    select * from field where parent_fields = #{fieldId,jdbcType=BIGINT}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from field
+  </select>
+  <select id="findByUserId" parameterType="long" resultMap="BaseResultMap">
+    select * from field where (select field_id from user_field where user_id = #{userId,jdbcType=BIGINT} ) = field_id
+  </select>
+  <select id="countParentFields" parameterType="long">
+    select count(*) from field where parent_fields = #{fieldId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Field">
+    insert into field (field_name, field_level, parent_fields, introduction)
+    VALUES (#{fieldName,jdbcType=VARCHAR} ,#{fieldLevel,jdbcType=INTEGER} ,#{parentFields,jdbcType=BIGINT} ,#{introduction,jdbcType=VARCHAR} )
+  </insert>
+  <update id="updateOne" parameterType="top.godder.datamoduleapi.domain.entity.Field">
+    update field
+    <set>
+      <if test="fieldName != null and fieldName != ''">
+        field_name = #{fieldName,jdbcType=VARCHAR} ,
+      </if>
+     <if test="fieldLevel != null">
+       field_level = #{fieldLevel,jdbcType=INTEGER} ,
+     </if>
+      <if test="parentFields != null">
+        parent_fields = #{parentFields,jdbcType=BIGINT} ,
+      </if>
+      <if test="introduction != null and introduction != ''">
+        introduction = #{introduction,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where field_id = #{fieldId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByFieldId" parameterType="long">
+    delete from field where field_id = #{fieldId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByParent" parameterType="long">
+    delete from field where parent_fields = #{fieldId,jdbcType=BIGINT}
+  </delete>
 </mapper>

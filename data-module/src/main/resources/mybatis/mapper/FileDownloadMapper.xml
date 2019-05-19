@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.FileDownloadMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.FileDownload">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.FileDownloadMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.FileDownload">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="file_id" jdbcType="BIGINT" property="fileId" />
+    <result column="download_id" jdbcType="BIGINT" property="downloadId"/>
     <result column="download_user" jdbcType="BIGINT" property="downloadUser" />
     <result column="download_time" jdbcType="TIMESTAMP" property="downloadTime" />
   </resultMap>
-    <select id="findFileDownloadByFile" parameterType="java.lang.Long" resultType="FileDownload">
-        select * from file_download where file_id = #{id}
-    </select>
-    <select id="findFileDownloadByUser" parameterType="java.lang.Long" resultType="FileDownload">
-        select * from file_download where download_user = #{id}
-    </select>
-    <select id="findAllFileDownload" resultType="FileDownload">
-        select * from file_download
-    </select>
-    <insert id="addFileDownload" parameterType="FileDownload">
-        insert into file_download (file_id, download_user) VALUES (#{fileId}, #{downloadUser})
-    </insert>
+  <select id="countFileId" parameterType="long" resultType="int">
+    select count(*) from file_download where file_id = #{fileId,jdbcType=BIGINT}
+  </select>
+  <select id="countDownloadUser" parameterType="long" resultType="int">
+    select count(*) from file_download where download_user = #{userId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.FileDownload">
+    insert into file_download (file_id, download_user) VALUES (#{fileId,jdbcType=BIGINT} ,#{downloadUser,jdbcType=BIGINT} )
+  </insert>
 </mapper>

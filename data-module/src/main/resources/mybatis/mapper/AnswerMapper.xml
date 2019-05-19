@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.AnswerMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.Answer">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.AnswerMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.Answer">
     <!--
       WARNING - @mbg.generated
     -->
     <id column="answer_id" jdbcType="BIGINT" property="answerId" />
-    <result column="question_id" jdbcType="BIGINT" property="answerId" />
+    <result column="question_id" jdbcType="BIGINT" property="questionId" />
     <result column="answer_user" jdbcType="BIGINT" property="answerUser" />
-    <result column="answer_file_name" jdbcType="VARCHAR" property="answerFileName" />
     <result column="answer_content" jdbcType="VARCHAR" property="answerContent" />
     <result column="answer_date" jdbcType="TIMESTAMP" property="answerDate" />
   </resultMap>
+  <select id="findByAnswerId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from answer where answer_id = #{answerId,jdbcType=BIGINT}
+  </select>
+  <select id="findByQuestionId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from answer where question_id = #{questionId,jdbcType=BIGINT}
+  </select>
+  <select id="findByAnswerUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from answer where question_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from answer
+  </select>
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Answer">
+    insert into answer (question_id, answer_user, answer_content)
+    VALUES (#{questionId,jdbcType=BIGINT} ,#{answerUser,jdbcType=BIGINT} ,#{answerContent,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateAnswerContent" parameterType="map">
+    update answer set answer_content = #{newContent,jdbcType=VARCHAR} where answer_id = #{answerId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByAnswerId" parameterType="java.lang.Long">
+    delete from answer where answer_id = #{answerId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByQuestionId" parameterType="java.lang.Long">
+    delete from answer where question_id = #{questionId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByAnswerUser" parameterType="java.lang.Long">
+    delete from answer where answer_user = #{userId,jdbcType=BIGINT}
+  </delete>
+    <select id="countQuestionId" parameterType="long" resultType="java.lang.Integer">
+      select count(*)
+      from answer
+      where question_id = #{questionId,jdbcType=BIGINT} ;
+    </select>
+  <select id="countAnswerUser" parameterType="long" resultType="integer">
+    select count(*)
+    from answer
+    where answer_user = #{userId,jdbcType=BIGINT} ;
+  </select>
 </mapper>

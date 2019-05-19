@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.DataFileMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.DataFile">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.DataFileMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.DataFile">
     <!--
       WARNING - @mbg.generated
     -->
@@ -9,7 +9,37 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="file_name" jdbcType="VARCHAR" property="fileName" />
     <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
-    <result column="field_id" jdbcType="BIGINT" property="fieldId" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
   </resultMap>
+  <select id="findByFiledId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from file where file_id = #{fileId}
+  </select>
+  <select id="findByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from file where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="findByFieldId" parameterType="long" resultMap="BaseResultMap">
+    select * from file where (select file_id from file_field where field_id = #{fieldId,jdbcType=BIGINT} ) = file_id
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from file
+  </select>
+  <select id="countUserId" parameterType="long" resultType="integer">
+    select count(*) from file where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="countFileId" parameterType="long" resultType="integer">
+    select count(*) from file_field where field_id = #{fieldId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.DataFile">
+    insert into file (user_id, file_name, introduction)
+    VALUES (#{user_id}, #{file_name}, #{introduction})
+  </insert>
+  <delete id="deleteByFileId" parameterType="long">
+    delete from file where file_id = #{fileId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByUserId" parameterType="long">
+    delete from file where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByFieldId" parameterType="long">
+    delete from file where (select file_id from file_field where field_id = #{fieldId,jdbcType=BIGINT} ) = file_id
+  </delete>
 </mapper>

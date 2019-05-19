@@ -1,13 +1,20 @@
-package top.godder.datamodule.domain.entity;
+package top.godder.datamoduleapi.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Table(name = "user_local_info")
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+/**
+ * 当前系统用户信息
+ */
 public class UserLocalInfo {
-    @Id
-    @Column(name = "user_id")
+
     private Long userId;
 
     /**

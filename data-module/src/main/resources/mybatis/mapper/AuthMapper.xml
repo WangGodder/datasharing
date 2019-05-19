@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.AuthMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.Auth">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.AuthMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.Auth">
     <!--
       WARNING - @mbg.generated
     -->
@@ -9,4 +9,13 @@
     <result column="auth_name" jdbcType="VARCHAR" property="authName" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
   </resultMap>
+  <select id="findOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from auth where auth_id = #{authId}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from auth
+  </select>
+  <select id="findByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from auth where (select auth_id from role_auth where role_id = #{roleId,jdbcType=BIGINT} ) = auth_id
+  </select>
 </mapper>

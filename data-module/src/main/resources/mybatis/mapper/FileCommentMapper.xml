@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.FileCommentMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.FileComment">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.FileCommentMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.FileComment">
     <!--
       WARNING - @mbg.generated
     -->
@@ -12,4 +12,53 @@
     <result column="comment" jdbcType="VARCHAR" property="comment" />
     <result column="comment_level" jdbcType="INTEGER" property="commentLevel" />
   </resultMap>
+  <select id="findByFileCommentId" parameterType="long" resultMap="BaseResultMap">
+    select * from file_comment where file_comment_id = #{fileCommentId,jdbcType=BIGINT}
+  </select>
+  <select id="findByFileId" parameterType="long" resultMap="BaseResultMap">
+    select * from file_comment where file_id = #{fileId,jdbcType=BIGINT}
+  </select>
+  <select id="findByUserId" parameterType="long" resultMap="BaseResultMap">
+    select * from file_comment where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="findByCommentLevel" parameterType="integer" resultMap="BaseResultMap">
+    select * from file_comment where comment_level = #{level,jdbcType=INTEGER}
+  </select>
+  <select id="findAvgLevel" parameterType="long" resultType="float">
+    select avg(comment_level) from file_comment where file_id = #{fileId,jdbcType=BIGINT}
+  </select>
+  <select id="countFileId" parameterType="long"  resultType="int">
+    select count(*) from file_comment where file_id = #{fileId,jdbcType=BIGINT}
+  </select>
+  <select id="countCommentLevel" parameterType="int" resultType="int">
+    select count(*) from file_comment where comment_level = #{level,jdbcType=INTEGER}
+  </select>
+  <select id="countUserId" parameterType="long" resultType="int">
+    select count(*) from file_comment where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.FileComment">
+    insert into file_comment (file_id, user_id, comment, comment_level)
+    VALUES (#{fileId,jdbcType=BIGINT} ,#{userId,jdbcType=BIGINT} ,#{comment} ,#{commentLevel,jdbcType=INTEGER} )
+  </insert>
+  <update id="updateOne" parameterType="top.godder.datamoduleapi.domain.entity.FileComment">
+    update file_comment
+    <set>
+      <if test="comment != null and comment != ''">
+        comment = #{comment,jdbcType=VARCHAR} ,
+      </if>
+     <if test="commentLevel != null">
+       comment_level = #{commentLevel,jdbcType=INTEGER}
+     </if>
+    </set>
+    where file_comment_id = #{fileCommentId,jdbcType=BIGINT} ;
+  </update>
+  <delete id="deleteByFileCommentId" parameterType="long">
+    delete from file_comment where file_comment_id = #{fileCOmmentId}
+  </delete>
+  <delete id="deleteByFileId" parameterType="long">
+    delete from file_comment where file_id = #{fileId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByUserId" parameterType="long">
+    delete from file_comment where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
 </mapper>

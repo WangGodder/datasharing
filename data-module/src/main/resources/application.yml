@@ -56,3 +56,7 @@ security:
     name: godder
     password: godder
 
+jwt:
+  secret: godder
+  token_prefix: datasharing
+  expriation_time: 7 * 24 * 60 * 60 * 1000

@@ -1,25 +1,30 @@
-package top.godder.datamodule.domain.entity;
+package top.godder.datamoduleapi.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
 
 @Getter
 @NoArgsConstructor
-@Table(name = "answer_evaluate")
+@AllArgsConstructor
+/**
+ *
+ *  @author: godder
+ *  @date: 2019/4/12
+ * 提问者对回答的评价
+ */
 public class AnswerEvaluate {
-    @Column(name = "answer_id")
     private Long answerId;
 
-    @Column(name = "user_id")
+    /**
+     * 对回答评价的用户ID
+     */
     private Long userId;
 
     /**
-     * 提问者对回答的评价级别(1-5分)
+     * 对回答的评价级别(1-5分)
      */
-    @Column(name = "answer_level")
     private Integer answerLevel;
 
     /**

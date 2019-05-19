@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="top.godder.dataservice.mapper.UserLocalInfoMapper">
-  <resultMap id="BaseResultMap" type="top.godder.dataapi.entry.UserLocalInfo">
+<mapper namespace="top.godder.datamodule.infrastructure.mapper.UserLocalInfoMapper">
+  <resultMap id="BaseResultMap" type="top.godder.datamoduleapi.domain.entity.UserLocalInfo">
     <!--
       WARNING - @mbg.generated
     -->
@@ -9,36 +9,24 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="credit" jdbcType="INTEGER" property="credit" />
   </resultMap>
-  <select id="findUserLocalInfoById" parameterType="java.lang.Long" resultType="UserLocalInfo">
-    select * from user_local_info where user_id = #{id};
+  <select id="findOne" parameterType="long" resultMap="BaseResultMap">
+    select * from user_local_info where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <select id="findUserLocalInfoByReq" parameterType="top.godder.dataapi.request.UserLocalInfoReq" resultType="UserLocalInfo">
-    select * from user_local_info
-    <where>
-      <if test="name != null and name != ''">and name = #{name}</if>
-      <if test="beginCredit != null">and #{beginCredit} &lt;= credit</if>
-      <if test="endCredit != null">and credit &lt;= #{endCredit}</if>
-    </where>
-  </select>
-  <insert id="addUserLocalInfo" parameterType="UserLocalInfo">
-    insert into user_local_info
-    values (
-                   #{userId, jdbcType=BIGINT},
-                   #{name, jdbcType=VARCHAR},
-            <if test="credit != null">#{credit, jdbcType=INTEGER}</if>
-    )
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.UserLocalInfo">
+    insert into user_local_info (user_id, name, credit)
+    VALUES (#{userId,jdbcType=BIGINT} ,#{name,jdbcType=VARCHAR} ,#{credit,jdbcType=INTEGER} )
   </insert>
-  <update id="updateUserLocalInfo" parameterType="UserLocalInfo">
+  <update id="updateCredit" parameterType="map">
     update user_local_info
-    <set>
-      <if test="name != null and name != ''">name = #{name, jdbcType=VARCHAR},</if>
-      <if test="credit != null">credit = #{credit, jdbtType=VARCHAR}</if>
-    </set>
-    where user_id = #{userId, jdbcType=BIGINT}
+    set credit = #{credit,jdbcType=INTEGER}
+    where user_id = #{credit,jdbcType=INTEGER}
   </update>
-  <delete id="deleteUserLocalInfo" parameterType="java.lang.Long">
-    delete
-    from user_local_info
-    where user_id = #{id};
+  <update id="updateName" parameterType="map">
+    update user_local_info
+    set name = #{name,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteOne" parameterType="long">
+    delete from user_local_info where user_id = #{userId,jdbcType=BIGINT}
   </delete>
 </mapper>

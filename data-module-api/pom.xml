@@ -8,15 +8,13 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>user-module-api</artifactId>
-    <version>1.0.0</version>
-    <name>user-module-api</name>
-    <description>data transform object and feign client</description>
+    <artifactId>data-module-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>data-module-api</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -26,15 +24,20 @@
         </dependency>
 
         <dependency>
-            <groupId>top.godder</groupId>
-            <artifactId>infrastructure-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>top.godder</groupId>
+            <artifactId>user-module-api</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

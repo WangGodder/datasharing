@@ -1,71 +1,55 @@
-package top.godder.datamodule.domain.entity;
+package top.godder.datamoduleapi.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 import java.util.Objects;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "file")
+/**
+ * 数据文件 （table name: file）
+ */
 public class DataFile {
     /**
      * 上传文件ID
      */
-    @Id
-    @Column(name = "file_id")
     private Long fileId;
 
-    @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "file_name")
     private String fileName;
 
     /**
      * 文件上传时间
      */
-    @Column(name = "upload_time")
     private Date uploadTime;
-
-    /**
-     * 文件所属领域
-     */
-    @Column(name = "field_id")
-    private Long fieldId;
 
     /**
      * 文件相关介绍
      */
     private String introduction;
 
-    public DataFile(Long userId, String fileName, Date uploadTime, Long fieldId, String introduction) {
-        this.userId = userId;
-        this.fileName = fileName;
-        this.uploadTime = uploadTime;
-        this.fieldId = fieldId;
-        this.introduction = introduction;
-    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         DataFile dataFile = (DataFile) o;
         return Objects.equals(fileId, dataFile.fileId) &&
-                Objects.equals(userId, dataFile.userId) &&
-                Objects.equals(fieldId, dataFile.fieldId);
+                Objects.equals(userId, dataFile.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fileId, userId, fieldId);
+        return Objects.hash(fileId, userId);
     }
 
     /**
@@ -130,24 +114,6 @@ public class DataFile {
      */
     public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
-    }
-
-    /**
-     * 获取文件所属领域
-     *
-     * @return field_id - 文件所属领域
-     */
-    public Long getFieldId() {
-        return fieldId;
-    }
-
-    /**
-     * 设置文件所属领域
-     *
-     * @param fieldId 文件所属领域
-     */
-    public void setFieldId(Long fieldId) {
-        this.fieldId = fieldId;
     }
 
     /**

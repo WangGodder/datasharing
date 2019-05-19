@@ -1,26 +1,33 @@
-package top.godder.datamodule.domain.entity;
+package top.godder.datamoduleapi.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
-@Table(name = "file_download")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+/**
+ * 文件下载记录
+ */
 public class FileDownload {
-    @Id
-    @Column(name = "file_id")
+    private Long downloadId;
+
+    /**
+     * 下载文件
+     */
     private Long fileId;
 
     /**
      * 下载用户
      */
-    @Column(name = "download_user")
     private Long downloadUser;
 
     /**
      * 下载时间
      */
-    @Column(name = "download_time")
     private Date downloadTime;
 
     /**

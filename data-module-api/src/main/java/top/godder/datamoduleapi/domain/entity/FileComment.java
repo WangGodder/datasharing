@@ -1,52 +1,44 @@
-package top.godder.datamodule.domain.entity;
+package top.godder.datamoduleapi.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 import java.util.Objects;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "file_comment")
+/**
+ * 数据文件评价
+ */
 public class FileComment {
-    @Id
-    @Column(name = "file_comment_id")
     private Long fileCommentId;
 
     /**
      * 评论文件
      */
-    @Column(name = "file_id")
     private Long fileId;
 
     /**
      * 评论人
      */
-    @Column(name = "user_id")
     private Long userId;
 
     /**
      * 评论时间
      */
-    @Column(name = "comment_date")
     private Date commentDate;
 
     /**
      * 评论内容
      */
-    @Column(name = "comment")
     private String comment;
 
     /**
      * 评论分数（5-1分）
      */
-    @Column(name = "comment_level")
     private Integer commentLevel;
 
     public FileComment(Long fileId, Long userId, Date commentDate, String comment, Integer commentLevel) {
