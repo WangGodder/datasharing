@@ -18,6 +18,11 @@
 
     <modules>
         <module>infrastructure-common</module>
+        <module>data-module-api</module>
+        <module>data-module</module>
+        <module>eureka-module</module>
+        <module>user-module-api</module>
+        <module>user-module</module>
     </modules>
 
     <!--配置管理，用来控制子项目配置的缺省配置版本-->

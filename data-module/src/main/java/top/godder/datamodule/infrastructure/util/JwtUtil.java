@@ -5,55 +5,55 @@ import com.alibaba.fastjson.JSON;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import top.godder.datamodule.domain.factory.UserBaseInfoFactory;
 import top.godder.datamoduleapi.domain.aggregate.UserBaseInfo;
-import top.godder.datamoduleapi.domain.entity.Auth;
-import top.godder.datamoduleapi.domain.entity.Role;
 import top.godder.usermoduleapi.domain.entity.UserTk;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author: godder
  * @date: 2019/5/19
  */
+@Component
 public class JwtUtil {
     /**
      * JWT有效期   （7 days)
      */
-    @Value(value = "${jwt.expiration_time}")
-    static long EXPIRATIONTIME;
+    private long expirationTime = 604800000;
     /**
      * JWT 密码
      */
     @Value(value = "${jwt.secret}")
-    static String SECRET;
+    private String secret;
     /**
      * Token 前缀
      */
     @Value(value = "${jwt.token_prefix}")
-    static String TOKEN_PREFIX;
+    private String tokenPrefix;
     /**
      * 存放Token的http Header Key
      */
-    static final String HEADER_STRING = "Authorization";
+    private static final String HEADER_STRING = "Authorization";
+
+    @Autowired
+    private UserBaseInfoFactory userBaseInfoFactory;
 
     /**
      * 根据用户及其权限创建JWT
      * @param userTk
-     * @param role
-     * @param auths
      * @return
      */
-    static String createJWT(UserTk userTk, Role role, List<Auth> auths) {
+    public String createJWT(UserTk userTk) {
         String JWT = Jwts.builder()
                 .claim("user", JSON.toJSONString(userTk))
                 .setSubject(userTk.getUserName())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
-                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
         return JWT;
     }
@@ -63,15 +63,15 @@ public class JwtUtil {
      * @param JWT
      * @return
      */
-    static UserBaseInfo verifyJWT(String JWT) {
+    public UserBaseInfo verifyJWT(String JWT) {
         if (JWT == null || JWT.isEmpty()) {
             return null;
         }
         Claims claims = Jwts.parser()
                 // 验签(检验密码)
-                .setSigningKey(SECRET)
+                .setSigningKey(secret)
                 // 删除前缀
-                .parseClaimsJws(JWT.replace(TOKEN_PREFIX, ""))
+                .parseClaimsJws(JWT.replace(tokenPrefix, ""))
                 .getBody();
 
         String userName = claims.getSubject();
@@ -80,7 +80,7 @@ public class JwtUtil {
         }
         UserTk userTk = JSON.parseObject((String) claims.get("user"), UserTk.class);
         Long userId = userTk.getId();
-        return UserBaseInfoFactory.createUserBaseInfo(userId);
+        return userBaseInfoFactory.createUserBaseInfo(userId);
     }
 
     /**
@@ -88,7 +88,7 @@ public class JwtUtil {
      * @param request
      * @return
      */
-    static String getJWTFromRequest(HttpServletRequest request) {
+    public static String getJWTFromRequest(HttpServletRequest request) {
         return request.getHeader(HEADER_STRING);
     }
 }
