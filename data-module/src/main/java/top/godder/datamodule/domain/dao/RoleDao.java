@@ -17,5 +17,7 @@ public interface RoleDao {
 
     boolean insertOne(Role role);
 
+    boolean insertUserRole(Long roleId, Long userId);
+
     boolean deleteOne(Long roleId);
 }

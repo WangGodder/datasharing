@@ -35,18 +35,21 @@ public class UserTkRepository {
         return -1L;
     }
 
-    public boolean register(UserTk userTk) {
+    public Long register(UserTk userTk) {
         // 空值检测,减少无效数据库访问
         if (userTk == null || userTk.getUserName() == null || userTk.getUserPs() == null) {
-            return false;
+            return null;
         }
         if (userTk.getUserName().isEmpty() || userTk.getUserPs().isEmpty()) {
-            return false;
+            return null;
         }
         if (!userTk.encryptionPs()) {
-            return false;
+            return null;
         }
-        return userTkDao.addUserTk(userTk);
+        if (userTkDao.addUserTk(userTk)) {
+            return userTk.getId();
+        }
+        return null;
     }
 
     public boolean changeUserPs(Map<String, Object> userTkMap) {

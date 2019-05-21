@@ -12,7 +12,7 @@
     <select id="findUserTkByUserName" parameterType="java.lang.String" resultType="UserTk">
     select * from user_tk where user_name = #{userName};
     </select>
-    <insert id="addUserTk" parameterType="UserTk">
+    <insert id="addUserTk" parameterType="UserTk" useGeneratedKeys="true" keyProperty="id">
     insert into user_tk (user_name, user_ps) values (#{userName, jdbcType=VARCHAR}, #{userPs, jdbcType=VARCHAR})
     </insert>
     <update id="updateUserTk" parameterType="UserTk">

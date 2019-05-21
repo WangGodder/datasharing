@@ -7,7 +7,7 @@ import top.godder.usermoduleapi.domain.entity.UserTk;
 public interface UserTkMapper extends BaseMapper<UserTk> {
     UserTk findUserTkByUserName(String userName);
 
-    boolean addUserTk(UserTk userTk);
+    int addUserTk(UserTk userTk);
 
     Integer updateUserTk(UserTk userTk);
 

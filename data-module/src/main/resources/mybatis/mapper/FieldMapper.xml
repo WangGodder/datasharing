@@ -29,9 +29,12 @@
   <select id="countParentFields" parameterType="long">
     select count(*) from field where parent_fields = #{fieldId,jdbcType=BIGINT}
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Field">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Field" useGeneratedKeys="true" keyProperty="fieldId">
     insert into field (field_name, field_level, parent_fields, introduction)
     VALUES (#{fieldName,jdbcType=VARCHAR} ,#{fieldLevel,jdbcType=INTEGER} ,#{parentFields,jdbcType=BIGINT} ,#{introduction,jdbcType=VARCHAR} )
+  </insert>
+  <insert id="insertUserField" parameterType="map">
+    insert into user_field (user_id, field_id) VALUES (#{userId,jdbcType=BIGINT} ,#{fieldId,jdbcType=BIGINT} )
   </insert>
   <update id="updateOne" parameterType="top.godder.datamoduleapi.domain.entity.Field">
     update field
@@ -56,5 +59,8 @@
   </delete>
   <delete id="deleteByParent" parameterType="long">
     delete from field where parent_fields = #{fieldId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteUserField" parameterType="map">
+    delete from user_field where field_id = #{fieldId,jdbcType=BIGINT} and user_id = #{userId,jdbcType=BIGINT}
   </delete>
 </mapper>

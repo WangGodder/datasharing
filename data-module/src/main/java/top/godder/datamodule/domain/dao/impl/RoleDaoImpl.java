@@ -38,6 +38,11 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
+    public boolean insertUserRole(Long roleId, Long userId) {
+        return mapper.insertUserRole(roleId, userId) == 1;
+    }
+
+    @Override
     public boolean deleteOne(Long roleId) {
         return mapper.deleteOne(roleId) == 1;
     }

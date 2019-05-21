@@ -33,7 +33,7 @@ public class LoginRest implements LoginApi {
 
     @Override
     @RequestMapping(value = Urls.UserTkApiUrl.REGISTER, method = POST)
-    public boolean register(@RequestBody UserTk userTk) {
+    public Long register(@RequestBody UserTk userTk) {
         return service.register(userTk);
     }
 

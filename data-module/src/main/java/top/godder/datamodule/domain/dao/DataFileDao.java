@@ -22,6 +22,8 @@ public interface DataFileDao {
 
     List<DataFile> findAll();
 
+    List<DataFile> findByFileName(String fileName);
+
     boolean insertOne(DataFile dataFile);
 
     boolean deleteByFileId(Long fileId);

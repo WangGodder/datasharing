@@ -16,7 +16,7 @@
   <select id="countDownloadUser" parameterType="long" resultType="int">
     select count(*) from file_download where download_user = #{userId,jdbcType=BIGINT}
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.FileDownload">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.FileDownload" useGeneratedKeys="true" keyProperty="downloadId">
     insert into file_download (file_id, download_user) VALUES (#{fileId,jdbcType=BIGINT} ,#{downloadUser,jdbcType=BIGINT} )
   </insert>
 </mapper>

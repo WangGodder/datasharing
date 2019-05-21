@@ -20,7 +20,7 @@ public class LoginService {
         return userTkRepository.getUserId(userTk);
     }
 
-    public boolean register(UserTk userTk) {
+    public Long register(UserTk userTk) {
         return userTkRepository.register(userTk);
     }
 

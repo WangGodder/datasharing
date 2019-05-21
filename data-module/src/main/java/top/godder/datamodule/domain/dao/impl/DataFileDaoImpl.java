@@ -38,6 +38,11 @@ public class DataFileDaoImpl implements DataFileDao {
     }
 
     @Override
+    public List<DataFile> findByFileName(String fileName) {
+        return mapper.findByFileName(fileName);
+    }
+
+    @Override
     public boolean insertOne(DataFile dataFile) {
         return mapper.insertOne(dataFile) == 1;
     }

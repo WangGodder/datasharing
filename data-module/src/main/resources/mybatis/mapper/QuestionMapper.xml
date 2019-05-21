@@ -20,7 +20,7 @@
   <select id="countQuizUser" parameterType="long" resultType="int">
     select count(*) from question where quiz_user = #{userId,jdbcType=BIGINT}
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Question">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Question" useGeneratedKeys="true" keyProperty="questionId">
     insert into question (question_name, question_description, question_credit, quiz_user)
     VALUES (#{questionName,jdbcType=VARCHAR} ,#{questionDescription,jdbcType=VARCHAR} ,#{questionCredit,jdbcType=INTEGER} ,#{quizUser})
   </insert>

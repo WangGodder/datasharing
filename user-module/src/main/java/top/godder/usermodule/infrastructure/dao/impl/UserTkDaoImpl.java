@@ -23,7 +23,7 @@ public class UserTkDaoImpl implements UserTkDao {
 
     @Override
     public boolean addUserTk(UserTk userTk) {
-        return mapper.addUserTk(userTk);
+        return mapper.addUserTk(userTk) == 1;
     }
 
     @Override

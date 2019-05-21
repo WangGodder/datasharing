@@ -20,6 +20,8 @@ public interface DataFileMapper extends BaseMapper<DataFile> {
 
     List<DataFile> findAll();
 
+    List<DataFile> findByFileName(String fileName);
+
     Integer countUserId(Long userId);
 
     Integer countFileId(Long fieldId);

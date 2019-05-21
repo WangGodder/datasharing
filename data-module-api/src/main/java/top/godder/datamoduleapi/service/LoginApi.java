@@ -23,7 +23,7 @@ public interface LoginApi {
     String login(String userName, String password);
 
     /**
-     * 新用户注册初始化本地信息，创建UserLocalInfo，同时给予初始积分
+     * 新用户注册初始化本地信息，创建UserLocalInfo，同时给予初始积分，和赋予用户角色
      * @param userId 新注册ID
      * @return 是否初始化成功
      */

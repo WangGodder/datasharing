@@ -19,4 +19,6 @@ public interface AuthDao {
      * @return
      */
     List<Auth> findByRoleId(Long roleId);
+
+    boolean insertRoleAuth(Long roleId, Integer authId);
 }

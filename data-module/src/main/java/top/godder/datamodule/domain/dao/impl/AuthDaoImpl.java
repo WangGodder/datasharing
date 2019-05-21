@@ -31,4 +31,10 @@ public class AuthDaoImpl implements AuthDao {
     public List<Auth> findByRoleId(Long roleId) {
         return mapper.findByRoleId(roleId);
     }
+
+    @Override
+    public boolean insertRoleAuth(Long roleId, Integer authId) {
+        return mapper.insertRoleAuth(roleId, authId) == 1;
+    }
+
 }

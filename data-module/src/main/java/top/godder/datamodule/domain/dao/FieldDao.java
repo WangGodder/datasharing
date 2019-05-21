@@ -1,5 +1,6 @@
 package top.godder.datamodule.domain.dao;
 
+import org.apache.ibatis.annotations.Param;
 import top.godder.datamoduleapi.domain.entity.Field;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public interface FieldDao {
 
     boolean insertOne(Field field);
 
+    boolean insertUserField(Long fieldId, Long userId);
+
     boolean updateOne(Field field);
 
     /**
@@ -47,4 +50,6 @@ public interface FieldDao {
      * @return
      */
     boolean deleteByParent(Long fieldId);
+
+    boolean deleteUserField(Long fieldId, Long userId);
 }

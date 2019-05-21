@@ -2,13 +2,16 @@ package top.godder.datamodule.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.godder.datamodule.domain.dao.RoleDao;
 import top.godder.datamodule.domain.dao.UserLocalInfoDao;
 import top.godder.datamodule.infrastructure.util.JwtUtil;
+import top.godder.datamoduleapi.domain.entity.Role;
 import top.godder.datamoduleapi.domain.entity.UserLocalInfo;
 import top.godder.usermoduleapi.domain.entity.UserTk;
 import top.godder.usermoduleapi.service.LoginApi;
 
 import java.net.ConnectException;
+import java.util.List;
 
 /**
  * @author: godder
@@ -20,6 +23,8 @@ public class LoginService {
     private LoginApi loginApi;
     @Autowired
     private UserLocalInfoDao userLocalInfoDao;
+    @Autowired
+    private RoleDao roleDao;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -41,10 +46,18 @@ public class LoginService {
 
     public boolean register(Long userId) {
         UserLocalInfo localInfo = userLocalInfoDao.findOne(userId);
+        List<Role> roles = roleDao.findByUserId(userId);
         if (localInfo == null) {
             UserLocalInfo userLocalInfo = UserLocalInfo.builder().userId(userId).credit(10).build();
-            return userLocalInfoDao.insertOne(userLocalInfo);
+            if (!userLocalInfoDao.insertOne(userLocalInfo)) {
+                return false;
+            }
         }
-        return false;
+        if (roles.size() == 0 || roles == null) {
+            if (!roleDao.insertUserRole(1L, userId)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

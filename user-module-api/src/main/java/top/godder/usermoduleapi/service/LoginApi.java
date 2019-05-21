@@ -18,8 +18,13 @@ public interface LoginApi {
     @RequestMapping(value = Urls.UserTkApiUrl.LOGIN, method = POST)
     Long login(UserTk userTk);
 
+    /**
+     * 注册新用户
+     * @param userTk
+     * @return 注册用户ID
+     */
     @RequestMapping(value = Urls.UserTkApiUrl.REGISTER, method = POST)
-    boolean register( UserTk userTk);
+    Long register( UserTk userTk);
 
     @RequestMapping(value = Urls.UserTkApiUrl.UPDATE_USER_TK, method = POST)
     boolean updatePs( Map<String, Object> userTkMap);

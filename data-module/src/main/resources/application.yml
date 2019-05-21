@@ -60,3 +60,5 @@ jwt:
   secret: godder
   token_prefix: datasharing
 #  expriation_time: 604800000
+
+data_store_dir: classpath:dataStore/

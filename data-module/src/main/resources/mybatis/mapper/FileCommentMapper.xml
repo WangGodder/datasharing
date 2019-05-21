@@ -36,7 +36,7 @@
   <select id="countUserId" parameterType="long" resultType="int">
     select count(*) from file_comment where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.FileComment">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.FileComment" useGeneratedKeys="true" keyProperty="fileCommentId">
     insert into file_comment (file_id, user_id, comment, comment_level)
     VALUES (#{fileId,jdbcType=BIGINT} ,#{userId,jdbcType=BIGINT} ,#{comment} ,#{commentLevel,jdbcType=INTEGER} )
   </insert>

@@ -48,6 +48,11 @@ public class FieldDaoImpl implements FieldDao {
     }
 
     @Override
+    public boolean insertUserField(Long fieldId, Long userId) {
+        return mapper.insertUserField(fieldId, userId) == 1;
+    }
+
+    @Override
     public boolean updateOne(Field field) {
         return mapper.updateOne(field) == 1;
     }
@@ -60,5 +65,10 @@ public class FieldDaoImpl implements FieldDao {
     @Override
     public boolean deleteByParent(Long fieldId) {
         return mapper.deleteByParent(fieldId) == mapper.countParentFields(fieldId);
+    }
+
+    @Override
+    public boolean deleteUserField(Long fieldId, Long userId) {
+        return mapper.deleteUserField(fieldId, userId) == 1;
     }
 }

@@ -23,7 +23,7 @@
   <select id="findAll" resultMap="BaseResultMap">
     select * from answer
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Answer">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Answer" useGeneratedKeys="true" keyProperty="questionId">
     insert into answer (question_id, answer_user, answer_content)
     VALUES (#{questionId,jdbcType=BIGINT} ,#{answerUser,jdbcType=BIGINT} ,#{answerContent,jdbcType=VARCHAR})
   </insert>

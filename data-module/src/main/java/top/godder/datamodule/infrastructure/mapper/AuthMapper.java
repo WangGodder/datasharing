@@ -1,6 +1,7 @@
 package top.godder.datamodule.infrastructure.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import top.godder.datamoduleapi.domain.entity.Auth;
 import top.godder.infrastructurecommon.database.BaseMapper;
 
@@ -17,4 +18,6 @@ public interface AuthMapper extends BaseMapper<Auth> {
     List<Auth> findAll();
 
     List<Auth> findByRoleId(Long roleId);
+
+    int insertRoleAuth(@Param("roleId") Long roleId, @Param("authId") Integer authId);
 }

@@ -19,8 +19,11 @@
   <select id="findByUserId" parameterType="long" resultMap="BaseResultMap">
     select * from role where (select role_id from role_user where user_id = #{userId,jdbcType=BIGINT} ) = role_id
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Role">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.Role" useGeneratedKeys="true" keyProperty="roleId">
     insert into role (role_name, comment) values (#{roleName} ,#{comment,jdbcType=VARCHAR} )
+  </insert>
+  <insert id="insertUserRole" parameterType="map" >
+    insert into role_user (user_id, role_id) VALUES (#{userId,jdbcType=BIGINT} ,#{roleId,jdbcType=BIGINT} )
   </insert>
   <delete id="deleteOne" parameterType="long">
     delete from role where role_id = #{roleId,jdbcType=BIGINT}

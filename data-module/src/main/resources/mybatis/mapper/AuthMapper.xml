@@ -18,4 +18,7 @@
   <select id="findByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select * from auth where (select auth_id from role_auth where role_id = #{roleId,jdbcType=BIGINT} ) = auth_id
   </select>
+  <insert id="insertRoleAuth" parameterType="map">
+    insert into role_auth (role_id, auth_id) VALUES (#{roleId,jdbcType=BIGINT} ,#{authId,jdbcType=INTEGER} )
+  </insert>
 </mapper>

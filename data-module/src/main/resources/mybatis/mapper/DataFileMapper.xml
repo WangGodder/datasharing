@@ -23,13 +23,16 @@
   <select id="findAll" resultMap="BaseResultMap">
     select * from file
   </select>
+  <select id="findByFileName" parameterType="string" resultMap="BaseResultMap">
+    select * from file where file_name = #{fileName,jdbcType=VARCHAR}
+  </select>
   <select id="countUserId" parameterType="long" resultType="integer">
     select count(*) from file where user_id = #{userId,jdbcType=BIGINT}
   </select>
   <select id="countFileId" parameterType="long" resultType="integer">
     select count(*) from file_field where field_id = #{fieldId,jdbcType=BIGINT}
   </select>
-  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.DataFile">
+  <insert id="insertOne" parameterType="top.godder.datamoduleapi.domain.entity.DataFile" useGeneratedKeys="true" keyProperty="fileId">
     insert into file (user_id, file_name, introduction)
     VALUES (#{user_id}, #{file_name}, #{introduction})
   </insert>
