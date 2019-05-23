@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import top.godder.datamodule.domain.dao.DataFileDao;
 import top.godder.datamodule.infrastructure.mapper.DataFileMapper;
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.vo.DataFileReq;
 
 import java.util.List;
 
@@ -40,6 +41,21 @@ public class DataFileDaoImpl implements DataFileDao {
     @Override
     public List<DataFile> findByFileName(String fileName) {
         return mapper.findByFileName(fileName);
+    }
+
+    @Override
+    public List<DataFile> findByReq(DataFileReq req) {
+        return mapper.findByReq(req);
+    }
+
+    @Override
+    public List<DataFile> findByUserBuy(Long userId) {
+        return mapper.findByUserBuy(userId);
+    }
+
+    @Override
+    public boolean buyFile(Long fileId, Long userId) {
+        return mapper.buyFile(fileId, userId);
     }
 
     @Override

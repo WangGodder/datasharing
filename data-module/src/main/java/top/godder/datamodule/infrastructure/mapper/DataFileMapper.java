@@ -1,7 +1,9 @@
 package top.godder.datamodule.infrastructure.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.vo.DataFileReq;
 import top.godder.infrastructurecommon.database.BaseMapper;
 
 import java.util.List;
@@ -21,6 +23,12 @@ public interface DataFileMapper extends BaseMapper<DataFile> {
     List<DataFile> findAll();
 
     List<DataFile> findByFileName(String fileName);
+
+    List<DataFile> findByReq(DataFileReq req);
+
+    List<DataFile> findByUserBuy(Long userId);
+
+    boolean buyFile(@Param("fileId") Long fileId, @Param("userId") Long userId);
 
     Integer countUserId(Long userId);
 

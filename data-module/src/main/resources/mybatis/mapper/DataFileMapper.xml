@@ -45,4 +45,25 @@
   <delete id="deleteByFieldId" parameterType="long">
     delete from file where (select file_id from file_field where field_id = #{fieldId,jdbcType=BIGINT} ) = file_id
   </delete>
+    <select id="findByReq" parameterType="top.godder.datamoduleapi.domain.vo.DataFileReq" resultMap="BaseResultMap">
+    select * from file
+      <where>
+        <if test="fieldId != null">
+          file_id = #{fieldId,jdbcType=BIGINT} and
+        </if>
+       <if test="fileName != null and fileName != ''">
+         file_name = #{fileName,jdbcType=VARCHAR} and
+       </if>
+        <if test="userId != null">
+          user_id = #{userId,jdbcType=BIGINT}
+        </if>
+      </where>
+    </select>
+    <select id="findByUserBuy" resultMap="BaseResultMap" parameterType="long">
+      select * from file where (select file_id from user_buy_file where file.user_id = #{userId,jdbcType=BIGINT} order by buy_time) = file_id
+    </select>
+  <select id="buyFile" resultType="boolean" parameterType="map">
+    select count(*) from user_buy_file where user_id = #{userId,jdbcType=BIGINT} and file_id = #{fileId,jdbcType=BIGINT}
+  </select>
+
 </mapper>

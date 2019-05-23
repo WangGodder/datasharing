@@ -1,6 +1,7 @@
 package top.godder.datamodule.domain.dao;
 
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.vo.DataFileReq;
 
 import java.util.List;
 
@@ -23,6 +24,12 @@ public interface DataFileDao {
     List<DataFile> findAll();
 
     List<DataFile> findByFileName(String fileName);
+
+    List<DataFile> findByReq(DataFileReq req);
+
+    List<DataFile> findByUserBuy(Long userId);
+
+    boolean buyFile(Long fileId, Long userId);
 
     boolean insertOne(DataFile dataFile);
 

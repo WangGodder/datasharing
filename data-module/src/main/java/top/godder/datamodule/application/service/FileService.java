@@ -3,14 +3,21 @@ package top.godder.datamodule.application.service;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamodule.domain.dao.DataFileDao;
+import top.godder.datamodule.domain.dao.FileCommentDao;
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.vo.DataFileReq;
 import top.godder.infrastructurecommon.util.RedisUtil;
 
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +60,27 @@ public class FileService {
         return dataFileDao.findByFiledId(fileId);
     }
 
+    public List<DataFile> getDataFileByReq(DataFileReq req) {
+        if (req == null) {
+            return null;
+        }
+        return dataFileDao.findByReq(req);
+    }
+
+    public boolean fileBuy(Long fileId, Long userId) {
+        if (userId == null || fileId == null) {
+            return false;
+        }
+        return dataFileDao.buyFile(fileId, userId);
+    }
+
+    public List<DataFile> buyList(Long userId) {
+        if (userId == null) {
+            return null;
+        }
+        return dataFileDao.findByUserBuy(userId);
+    }
+
     public boolean insertDataFile(DataFile dataFile) {
         if (dataFile == null) {
             return false;
@@ -60,13 +88,32 @@ public class FileService {
         return dataFileDao.insertOne(dataFile);
     }
 
-    public boolean insertDataFileRedis(DataFile dataFile) {
-        if (dataFile == null) {
+//    public boolean insertDataFileRedis(DataFile dataFile) {
+//        if (dataFile == null) {
+//            return false;
+//        }
+//        String key = new StringBuilder("insert_file_").append(dataFile.getFileId()).toString();
+//        redisUtil.set(key, JSON.toJSONString(dataFile));
+//        return true;
+//    }
+
+    public boolean deleteDataFile(Long fileId) {
+        if (fileId == null) {
             return false;
         }
-        String key = new StringBuilder("insert_file_").append(dataFile.getFileId()).toString();
-        redisUtil.set(key, JSON.toJSONString(dataFile));
-        return true;
+        deleteFile(fileId);
+        return dataFileDao.deleteByFileId(fileId);
+    }
+
+    private boolean deleteFile(Long fileId) {
+        if (fileId == null) {
+            return false;
+        }
+        File dir = new File(this.dataStoreDir + fileId);
+        if (!dir.exists()) {
+            return true;
+        }
+        return dir.delete();
     }
 
     public List<String> getDataFileNameList(Long fileId) {
@@ -85,7 +132,41 @@ public class FileService {
         return names;
     }
 
-    public File downloadDataFile(Long fileId, String fileName) {
+    public ResponseEntity downloadDataFile(Long fileId, String fileName, HttpServletRequest request) throws IOException {
+        File file = getDownloadDataFile(fileId, fileName);
+        if (file == null) {
+            return null;
+        }
+        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity entity = null;
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            byte[] bytes = new byte[in.available()];
+            String name = file.getName();
+            //处理IE下载文件的中文名称乱码的问题
+            String header = request.getHeader("User-Agent").toUpperCase();
+            if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
+                name = URLEncoder.encode(name, "utf-8");
+                //IE下载文件名空格变+号问题
+                name = name.replace("+", "%20");
+            } else {
+                name = new String(name.getBytes(), StandardCharsets.ISO_8859_1);
+            }
+            entity = new ResponseEntity(bytes, headers, HttpStatus.OK);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        return entity;
+    }
+
+    private File getDownloadDataFile(Long fileId, String fileName) {
         File dir = new File(this.dataStoreDir + fileId);
         if (!dir.exists() || !dir.isDirectory()) {
             return null;

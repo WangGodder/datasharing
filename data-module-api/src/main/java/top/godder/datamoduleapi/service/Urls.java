@@ -30,9 +30,21 @@ public class Urls {
         public static final String GET_DATA_FILE_SUB_FIELD = "/datafile/getDataFileByField";
         public static final String GET_DATA_FILE_BY_USER = "/datafile/getDataFileByUser";
         public static final String GET_DATA_FILE = "/datafile/getDataFile";
+        public static final String GET_DATA_FILE_BY_REQ = "/datafile/getDataFileByReq";
+        public static final String USER_HAS_BUY = "/datafile/userHasBuy";
+        public static final String USER_BUY_LIST = "/datafile/userBuyList";
         public static final String INSERT_DATA_FILE = "/datafile/insertDataFile";
+        public static final String DELETE_DATA_FILE = "/datafile/deleteDataFile";
         public static final String GET_DATA_FILE_NAME_LIST = "/datafile/getDataFileNameList";
         public static final String DOWNLOAD_DATA_FILE = "/datafile/downloadDataFile";
         public static final String UPLOAD_DATA_FILE = "/datafile/uploadDataFile";
+    }
+
+    public static class FileCommentApi {
+        public static final String GET_COMMENT_BY_FILE = "/datafile/getFileComments";
+        public static final String GET_COMMENT_BY_USER = "/datafile/getFileCommentsByUser";
+        public static final String GET_COMMENT_BY_LEVEL = "/datafile/getFileCommentByLevel";
+        public static final String GET_AVG_LEVEL = "/datafile/getAvgLevel";
+        public static final String ADD_COMMENT = "/datafile/addFileComment";
     }
 }
