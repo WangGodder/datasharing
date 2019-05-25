@@ -23,6 +23,8 @@ public interface FieldMapper extends BaseMapper<Field> {
 
     List<Field> findByUserId(Long userId);
 
+    List<Field> findByFileId(Long fileId);
+
     int countParentFields(Long fieldId);
 
     int insertOne(Field field);

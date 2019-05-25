@@ -30,6 +30,14 @@ public interface FieldApi {
     List<Field> getSubField(Long parentId);
 
     /**
+     * 获取指定文件的所在领域
+     * @param fileId
+     * @return
+     */
+    @RequestMapping(value = Urls.FieldApi.GET_FIELD_BY_FILE, method = POST)
+    List<Field> getFieldByFile(Long fileId);
+
+    /**
      * 添加领域，在redis中记录，在指定时间插入数据库
      * @param field
      * @return

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import top.godder.datamodule.domain.dao.DataFileDao;
 import top.godder.datamodule.domain.dao.FieldDao;
 import top.godder.datamoduleapi.domain.entity.Field;
 import top.godder.infrastructurecommon.util.RedisUtil;
@@ -30,6 +31,13 @@ public class FieldService {
             return null;
         }
         return fieldDao.findByParentFields(parentId);
+    }
+
+    public List<Field> getByFile(Long fileId) {
+        if (fileId == null) {
+            return null;
+        }
+        return fieldDao.findByFileId(fileId);
     }
 
     public boolean addField(Field field) {

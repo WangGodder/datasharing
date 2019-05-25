@@ -1,6 +1,5 @@
 package top.godder.datamodule.application.service;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamodule.domain.dao.DataFileDao;
-import top.godder.datamodule.domain.dao.FileCommentDao;
 import top.godder.datamoduleapi.domain.entity.DataFile;
 import top.godder.datamoduleapi.domain.vo.DataFileReq;
 import top.godder.infrastructurecommon.util.RedisUtil;
@@ -132,16 +130,14 @@ public class FileService {
         return names;
     }
 
-    public ResponseEntity downloadDataFile(Long fileId, String fileName, HttpServletRequest request) throws IOException {
+    public ResponseEntity<byte[]> downloadDataFile(Long fileId, String fileName, HttpServletRequest request) throws IOException {
         File file = getDownloadDataFile(fileId, fileName);
         if (file == null) {
             return null;
         }
         HttpHeaders headers = new HttpHeaders();
-        ResponseEntity entity = null;
-        InputStream in = null;
-        try {
-            in = new FileInputStream(file);
+        ResponseEntity<byte[]> entity = null;
+        try (InputStream in = new FileInputStream(file)) {
             byte[] bytes = new byte[in.available()];
             String name = file.getName();
             //处理IE下载文件的中文名称乱码的问题
@@ -153,15 +149,9 @@ public class FileService {
             } else {
                 name = new String(name.getBytes(), StandardCharsets.ISO_8859_1);
             }
-            entity = new ResponseEntity(bytes, headers, HttpStatus.OK);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            entity = new ResponseEntity<>(bytes, headers, HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (in != null) {
-                in.close();
-            }
         }
         return entity;
     }

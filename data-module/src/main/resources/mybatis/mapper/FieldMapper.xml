@@ -26,6 +26,9 @@
   <select id="findByUserId" parameterType="long" resultMap="BaseResultMap">
     select * from field where (select field_id from user_field where user_id = #{userId,jdbcType=BIGINT} ) = field_id
   </select>
+  <select id="findByFileId" parameterType="long" resultMap="BaseResultMap">
+    select * from field where (select field_id from file_field where file_id = #{fileId,jdbcType=BIGINT} ) = field_id
+  </select>
   <select id="countParentFields" parameterType="long">
     select count(*) from field where parent_fields = #{fieldId,jdbcType=BIGINT}
   </select>

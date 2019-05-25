@@ -23,6 +23,8 @@ public interface FieldDao {
 
     List<Field> findAll();
 
+    List<Field> findByFileId(Long fileId);
+
     /**
      * 返回指定用户所在的领域
      * @param userId

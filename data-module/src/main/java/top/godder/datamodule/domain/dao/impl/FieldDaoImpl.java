@@ -38,6 +38,11 @@ public class FieldDaoImpl implements FieldDao {
     }
 
     @Override
+    public List<Field> findByFileId(Long fileId) {
+        return mapper.findByFileId(fileId);
+    }
+
+    @Override
     public List<Field> findByUserId(Long userId) {
         return mapper.findByUserId(userId);
     }

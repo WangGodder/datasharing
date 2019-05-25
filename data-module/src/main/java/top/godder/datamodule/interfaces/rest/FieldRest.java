@@ -28,6 +28,11 @@ public class FieldRest implements FieldApi {
     }
 
     @Override
+    public List<Field> getFieldByFile(Long fileId) {
+        return null;
+    }
+
+    @Override
     public boolean addField(Field field) {
         return fieldService.addFieldRedis(field);
     }

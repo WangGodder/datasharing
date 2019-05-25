@@ -21,6 +21,7 @@ public class Urls {
     public static class FieldApi {
         public static final String GET_ALL_FIELD = "/field/getAllField";
         public static final String GET_SUB_FIELD = "/field/getSubField";
+        public static final String GET_FIELD_BY_FILE = "/field/getFieldByFile";
         public static final String ADD_FIELD = "/field/addField";
         public static final String UPDATE_FIELD = "/field/updateField";
     }

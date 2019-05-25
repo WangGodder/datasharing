@@ -1,0 +1,9 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: web-module
+  thymeleaf:
+    cache: false
+# ¹Ø±Õ spring debug Ä£Ê½
+debug: false
