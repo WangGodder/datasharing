@@ -32,3 +32,5 @@ gen### Java template
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+/web-module/src/main/resources/static/element-ui/
+/web-module/src/main/resources/static/font/
