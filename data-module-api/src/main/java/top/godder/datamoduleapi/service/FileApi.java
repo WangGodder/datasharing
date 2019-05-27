@@ -3,27 +3,28 @@ package top.godder.datamoduleapi.service;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamoduleapi.config.MultipartSupportConfig;
 import top.godder.datamoduleapi.domain.entity.DataFile;
 import top.godder.datamoduleapi.domain.vo.DataFileReq;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @author: godder
  * @date: 2019/5/21
  */
-@FeignClient(value = "service-data", url = "${service.service-data}", configuration = MultipartSupportConfig.class)
+@FeignClient(name = "service-data", url = "${service.service-data}", configuration = MultipartSupportConfig.class)
 public interface FileApi {
     /**
      * 获取全部数据文件
      * @return
      */
-    @PostMapping(value = Urls.FileApi.GET_ALL_DATA_FILE)
+    @RequestMapping(value = Urls.FileApi.GET_ALL_DATA_FILE, method = POST)
     List<DataFile> getAllDataFile();
 
     /**
@@ -31,7 +32,7 @@ public interface FileApi {
      * @param userId
      * @return
      */
-    @PostMapping(value = Urls.FileApi.GET_DATA_FILE_BY_USER)
+    @RequestMapping(value = Urls.FileApi.GET_DATA_FILE_BY_USER, method = POST)
     List<DataFile> getDataFileByUser(Long userId);
 
     /**
@@ -68,12 +69,11 @@ public interface FileApi {
 
     /**
      * 获取指定文件和用户是否购买
-     * @param fileId
-     * @param userId
+     * @param map 用户ID 文件ID
      * @return
      */
     @PostMapping(value = Urls.FileApi.USER_HAS_BUY)
-    boolean userHasBuy(Long fileId, Long userId);
+    boolean userHasBuy(Map<String, Long> map);
 
     /**
      * 获取指定用户的数据购买列表
@@ -90,7 +90,7 @@ public interface FileApi {
      * @return
      */
     @PostMapping(value = Urls.FileApi.UPLOAD_DATA_FILE, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    boolean uploadDataFile(@RequestPart(value = "file") MultipartFile[] files, @RequestPart(value = "dataFile") DataFile dataFile);
+    boolean uploadDataFile(@RequestPart(value = "file") MultipartFile[] files, @RequestParam(value = "dataFile") DataFile dataFile);
 
     /**
      * 删除数据文件,和相关信息
@@ -102,11 +102,9 @@ public interface FileApi {
 
     /**
      * 下载数据文件
-     * @param fileId 数据文件ID
-     * @param fileName 详细数据文件名称
-     * @param request 来自client的request
+     * @param map fileId: 数据文件ID,fileName: 详细数据文件名称,request: 来自client的request
      * @return responseEntity 可直接作为response body内容返回给client
      */
     @PostMapping(value = Urls.FileApi.DOWNLOAD_DATA_FILE)
-    ResponseEntity downloadDataFile(Long fileId, String fileName, HttpServletRequest request);
+    ResponseEntity downloadDataFile(Map<String, Object> map);
 }

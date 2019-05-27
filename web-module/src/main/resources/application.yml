@@ -5,5 +5,5 @@ spring:
     name: web-module
   thymeleaf:
     cache: false
-# 关闭 spring debug 模式
+# 锟截憋拷 spring debug 模式
 debug: false

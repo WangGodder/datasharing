@@ -58,3 +58,4 @@ security:
   user:
     name: godder
     password: godder
+#debug: true

@@ -9,12 +9,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>data-module-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>data-module-api</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -30,6 +32,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.github.openfeign.form</groupId>
             <artifactId>feign-form-spring</artifactId>
             <version>3.3.0</version>
@@ -39,12 +46,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>top.godder</groupId>
-            <artifactId>user-module-api</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>top.godder</groupId>-->
+            <!--<artifactId>infrastructure-common</artifactId>-->
+            <!--<version>1.0.0</version>-->
+        <!--</dependency>-->
+
+
     </dependencies>
 
 

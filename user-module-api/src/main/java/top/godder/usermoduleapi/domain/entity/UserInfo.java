@@ -3,8 +3,6 @@ package top.godder.usermoduleapi.domain.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -12,9 +10,7 @@ import java.util.Objects;
  */
 @Getter
 @NoArgsConstructor
-@Table(name = "user_info")
 public class UserInfo {
-    @Column(name = "user_id")
     private Long userId;
 
     /**

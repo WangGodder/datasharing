@@ -23,7 +23,6 @@ import java.util.Random;
 public class FileUtil {
     public static Log log = LogFactory.getLog(FileUtil.class);
 
-
     public JSONObject uploadFile(String savePath, int maxSize, @RequestParam("") MultipartFile file) throws IOException {
         JSONObject obj = new JSONObject();
         //获取springBoot项目的绝对路径

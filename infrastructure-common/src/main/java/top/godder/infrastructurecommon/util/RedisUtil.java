@@ -2,7 +2,7 @@ package top.godder.infrastructurecommon.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Description :    使用redisTemplate的操作实现类
  * -------------------------------------------------
  */
-@Component
+@Service
 public class RedisUtil {
     private final StringRedisTemplate redisTemplate;
 

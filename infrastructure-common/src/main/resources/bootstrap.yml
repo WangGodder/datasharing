@@ -30,8 +30,8 @@ properties:
       password: 970701wxz
 
 service:
-  service-user: http://127.0.0.1:8810
-  service-data: http://127.0.0.1:8820
+  service-user: http://localhost:8810/
+  service-data: http://localhost:8820/
 spring:
   redis:
     host: localhost

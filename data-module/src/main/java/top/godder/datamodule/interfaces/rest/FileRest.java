@@ -12,6 +12,7 @@ import top.godder.datamoduleapi.service.FileApi;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: godder
@@ -53,7 +54,9 @@ public class FileRest implements FileApi {
     }
 
     @Override
-    public boolean userHasBuy(Long fileId, Long userId) {
+    public boolean userHasBuy(Map<String, Long> map) {
+        Long fileId = map.get("fileId");
+        Long userId = map.get("userId");
         return fileService.fileBuy(fileId, userId);
     }
 
@@ -78,7 +81,10 @@ public class FileRest implements FileApi {
     }
 
     @Override
-    public ResponseEntity downloadDataFile(Long fileId, String fileName, HttpServletRequest request) {
+    public ResponseEntity downloadDataFile(Map<String, Object> map) {
+        Long fileId = (Long) map.get("fileId");
+        String fileName = (String) map.get("fileName");
+        HttpServletRequest request = (HttpServletRequest) map.get("request");
         try {
             return fileService.downloadDataFile(fileId, fileName, request);
         } catch (IOException e) {

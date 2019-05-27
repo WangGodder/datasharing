@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class UserBaseInfo {
-    private Long userId = null;
+    private Long userId;
     private String localName;
     private int credit;
     private List<Field> fieldList;

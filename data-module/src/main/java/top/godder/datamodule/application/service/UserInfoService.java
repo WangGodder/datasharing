@@ -6,6 +6,7 @@ import top.godder.datamodule.domain.dao.FieldDao;
 import top.godder.datamodule.domain.dao.UserLocalInfoDao;
 import top.godder.datamodule.infrastructure.util.JwtUtil;
 import top.godder.datamoduleapi.domain.aggregate.UserBaseInfo;
+import top.godder.datamoduleapi.domain.entity.UserLocalInfo;
 import top.godder.infrastructurecommon.result.JsonResult;
 
 /**
@@ -35,37 +36,45 @@ public class UserInfoService {
         return userLocalInfoDao.updateName(userId, name);
     }
 
-    public JsonResult changeCredit(Long userId, int credit) {
+    public Integer changeCredit(Long userId, int credit) {
+        // userId is null
         if (userId == null) {
-            return JsonResult.fail(2,"userId is null");
+            return 2;
         }
-        int currentCredit = userLocalInfoDao.findOne(userId).getCredit();
+        // lost current user info
+        UserLocalInfo userLocalInfo = userLocalInfoDao.findOne(userId);
+        if (userLocalInfo == null) {
+            return 5;
+        }
+        int currentCredit = userLocalInfo.getCredit();
+        // credit is not enough
         if (currentCredit + credit < 0) {
-            return JsonResult.fail(4,"credit is not enough");
+            return 4;
         }
         if (userLocalInfoDao.updateCredit(userId, currentCredit + credit)) {
-            return JsonResult.success(currentCredit + credit);
+            return 0;
         }
-        return JsonResult.fail(3,"update credit is fail");
+        // update credit is fail
+        return 3;
     }
 
-    public JsonResult addUserField(Long userId, Long fieldId) {
+    public boolean addUserField(Long userId, Long fieldId) {
         if (userId == null || fieldId == null) {
-            return JsonResult.fail(2, "user id and field id is null");
+            return false;
         }
         if (fieldDao.insertUserField(fieldId, userId)) {
-            return JsonResult.success();
+            return true;
         }
-        return JsonResult.fail(3, "insert fail");
+        return false;
     }
 
-    public JsonResult deleteUserFeild(Long userId, Long fieldId) {
+    public boolean deleteUserFeild(Long userId, Long fieldId) {
         if (userId == null || fieldId == null) {
-            return JsonResult.fail(2, "user id and field id is null");
+            return false;
         }
         if (fieldDao.deleteUserField(fieldId, userId)) {
-            return JsonResult.success();
+            return true;
         }
-        return JsonResult.fail(3, "delete fail");
+        return false;
     }
 }

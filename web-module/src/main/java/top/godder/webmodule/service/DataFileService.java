@@ -15,7 +15,9 @@ import top.godder.datamoduleapi.service.UserInfoApi;
 import top.godder.webmodule.vo.FileSimpleInfo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: godder
@@ -39,7 +41,11 @@ public class DataFileService {
             return null;
         }
         UserBaseInfo userBaseInfo = userInfoApi.getBaseInfo(jwt);
-        ResponseEntity downFile = fileApi.downloadDataFile(fileId, fileName, request);
+        Map<String, Object> map = new HashMap<>(3);
+        map.put("fileId", fileId);
+        map.put("fileName", fileName);
+        map.put("request", request);
+        ResponseEntity downFile = fileApi.downloadDataFile(map);
         return downFile;
     }
 

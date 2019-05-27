@@ -18,7 +18,7 @@ public interface FieldApi {
      * 获取全部的领域
      * @return
      */
-    @RequestMapping(value = Urls.FieldApi.GET_ALL_FIELD, method = POST)
+    @RequestMapping(value = Urls.FieldApi.GET_ALL_FIELD, method = GET)
     List<Field> getAllField();
 
     /**
@@ -26,7 +26,7 @@ public interface FieldApi {
      * @param parentId
      * @return
      */
-    @RequestMapping(value = Urls.FieldApi.GET_SUB_FIELD, method = POST)
+    @RequestMapping(value = Urls.FieldApi.GET_SUB_FIELD, method = GET)
     List<Field> getSubField(Long parentId);
 
     /**
@@ -34,7 +34,7 @@ public interface FieldApi {
      * @param fileId
      * @return
      */
-    @RequestMapping(value = Urls.FieldApi.GET_FIELD_BY_FILE, method = POST)
+    @RequestMapping(value = Urls.FieldApi.GET_FIELD_BY_FILE, method = GET)
     List<Field> getFieldByFile(Long fileId);
 
     /**

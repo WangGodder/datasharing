@@ -3,9 +3,6 @@ package top.godder.usermoduleapi.domain.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -13,10 +10,7 @@ import java.util.Objects;
  */
 @Getter
 @NoArgsConstructor
-@Table(name = "city")
 public class City {
-    @Id
-    @Column(name = "city_id")
     private Integer cityId;
 
     /**
@@ -27,7 +21,6 @@ public class City {
     /**
      * 上级省份id
      */
-    @Column(name = "province_id")
     private Integer provinceId;
 
     /**

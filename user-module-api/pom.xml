@@ -26,6 +26,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+        </dependency>
+
+
+        <dependency>
             <groupId>top.godder</groupId>
             <artifactId>infrastructure-common</artifactId>
             <version>1.0.0</version>

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.8.RELEASE</version>
+        <version>1.5.9.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -17,13 +17,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>infrastructure-common</module>
         <module>data-module-api</module>
         <module>data-module</module>
         <module>eureka-module</module>
         <module>user-module-api</module>
         <module>user-module</module>
         <module>web-module</module>
+        <module>infrastructure-common</module>
     </modules>
 
     <!--配置管理，用来控制子项目配置的缺省配置版本-->
@@ -34,7 +34,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <!--spring cloud Edgware版本 在spring-boot 1.5.x上构建-->
-                <version>1.5.8.RELEASE</version>
+                <version>1.5.9.RELEASE</version>
                 <!--用作依赖管理内，从其他dependency导入配置-->
                 <scope>import</scope>
                 <!--将父类的依赖打包成pom，减少pom文件大小-->

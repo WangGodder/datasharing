@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>数据共享平台</title>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css"/>
+    <link rel="icon" href="/img/favicon.ico"/>
+    <script src="/js/jquery/jquery.js"></script>
+    <script src="/js/vue/vue.min.js"></script>
+    <script src="/element-ui/lib/index.js"></script>
+    <!--<script src="/js/elementui/index.js"></script>-->
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <!--<script src="/js/notify.js"></script>-->
+    <!--<script src="/js/bootstrap-notify.min.js"></script>-->
+    <script src="/js/utils/jwt_utils.js"></script>
+    <script src="/js/components/login_board.js"></script>
+
+</head>
+<body>
+<div id="app" width="100%">
+    <div id="logo">
+        <a href="">
+            <img src="/img/img_logo.jpg" style="width: 100px;" class="img-circle"/>
+            <img src="/img/text_logo.png"/>
+        </a>
+    </div>
+    <br/>
+    <login_board
+            service_url="postLogin"
+            register_url=""
+            forget_password_url=""
+            class="col-lg-offset-5 col-lg-2
+              col-md-offset-3 col-md-6
+              col-sm-offset-2 col-sm-8
+              col-xs-offset-1 col-xs-10 ">
+
+    </login_board>
+
+    <!--底部导航条-->
+    <div class="bg-info row navbar-fixed-bottom">
+        <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>-->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">copyright: godder@swu 2019</div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">地址:重庆市北碚区西南大学</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 h5">数据共享平台</div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="/css/vue/default.css"/>
+<style>
+    #app {
+        margin-top: 60px;
+    }
+</style>
+<script>
+    (function (win) {
+        let app = new Vue({
+            el: '#app',
+            name: 'app',
+            components: {
+                login_board
+            }
+        })
+    })(window||{})
+
+</script>
+</html>
