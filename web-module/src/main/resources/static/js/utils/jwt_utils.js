@@ -7,6 +7,10 @@ function getJwt() {
         let jwtStr = localStorage.getItem('jwt');
         return jwtStr;
     }
+    if (sessionStorage.hasOwnProperty('jwt')) {
+        let jwtStr = sessionStorage.getItem('jwt');
+        return jwtStr;
+    }
     return null;
 }
 

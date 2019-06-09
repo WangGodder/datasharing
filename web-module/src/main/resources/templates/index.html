@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>数据共享平台</title>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css"/>
+    <link rel="icon" href="/img/favicon.ico"/>
+    <script src="/js/jquery/jquery.js"></script>
+    <script src="/js/vue/vue.min.js"></script>
+    <script src="/element-ui/lib/index.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/utils/jwt_utils.js"></script>
+    <script src="/js/components/top_column.js"></script>
+    <script src="/js/components/notice_board.js"></script>
+</head>
+<body>
+<div id="app">
+    <top-column :username="this.username"></top-column>
+    <notice_board style="margin-top: 2%" v-bind:notice_info="this.notice_info"></notice_board>
+
+
+    <!--底部导航条-->
+    <div class="bg-info row navbar-fixed-bottom">
+        <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>-->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">copyright: godder@swu 2019</div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">地址:重庆市北碚区西南大学</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 h5">数据共享平台</div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="/css/vue/default.css"/>
+<script>
+    (function (win) {
+        let app = new Vue({
+            el: '#app',
+            name: 'app',
+            components: {
+                Notice_board,
+                TopColumn,
+            },
+            data() {
+                return {
+                    notice_info: [
+                        {'img_url': "/img/slide.svg", 'url_jump': 'github.com'},
+                        {'img_url': "/img/slide.svg", 'url_jump': 'github.com'}
+                    ],
+                    username: '',
+                    user: null,
+                }
+            },
+            created() {
+                const user = getUser();
+                if (user == null) {
+                    const jwt = getJwt()
+                    if (jwt != null) {
+                        this.auto_login(jwt)
+                    }
+                } else {
+                    this.user = user;
+                    this.username = user['userName'];
+                }
+
+            },
+            methods: {
+                // 返回User信息并保存在localsession中
+                auto_login: function (jwt) {
+                    let user = null;
+                    let fali_case = 0;
+                    $.post({
+                        url: '/user/verifyJwt',
+                        data: {'jwt': jwt},
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == 0) {
+                                user = data.object;
+                                sessionStorage.setItem("user", user);
+                            }
+                            if (data.status == 1) {
+                                fali_case = 2;
+                            }
+                        },
+                        error: function () {
+                            fali_case = 1
+                        }
+                    })
+                    this.user = user;
+                    this.username = user['userName'];
+                    if (fali_case === 1) {
+                        this.check_connect()
+                    }
+                    if (fali_case === 2) {
+                        this.jwt_overdue()
+                    }
+                },
+                check_connect: function () {
+                    this.$notify.error({
+                        title: '网络异常',
+                        message: '无法连接用户服务，请检测网络连接和网络环境',
+                    })
+                },
+                jwt_overdue: function () {
+                    this.$notify({
+                        title: '自动登陆失效',
+                        message: '自动登陆失效，请重新登陆',
+                        type: "warning"
+                    })
+
+                }
+            }
+        })
+    })(window||{})
+</script>
+</html>

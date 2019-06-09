@@ -22,7 +22,7 @@ public interface UserInfoApi {
      * @return 如果jwt为空则返回null，否之返回UserBaseInfo实例
      */
     @RequestMapping(value = Urls.UserInfoApi.GET_BASE_INFO, method = POST)
-    UserBaseInfo getBaseInfo(@RequestBody String jwt);
+    UserBaseInfo getBaseInfo(String jwt);
 
     /**
      * 修改系统用户名称

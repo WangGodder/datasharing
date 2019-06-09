@@ -3,6 +3,7 @@ package top.godder.webmodule.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.godder.datamoduleapi.domain.aggregate.UserBaseInfo;
 import top.godder.infrastructurecommon.result.JsonResult;
@@ -18,7 +19,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping(value = "/user/verifyJwt")
-    public JsonResult verfiyJwt(@RequestBody String jwt) {
+    public JsonResult verfiyJwt(@RequestParam("jwt") String jwt) {
         if (jwt == null) {
             return JsonResult.fail("jwt is empty");
         }
