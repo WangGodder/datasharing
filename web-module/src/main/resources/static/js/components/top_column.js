@@ -13,11 +13,14 @@ let TopColumn = {
         }
     },
     methods: {
+        goHome: function() {
+          window.location.href = "/";
+        },
         searchContent: function () {
             alert(this.search_content);
         },
         go_fileStore: function() {
-          window.location.href = "/fileStore"
+          window.location.href = "fileStore"
         },
         go_community: function () {
             window.open("")
@@ -51,7 +54,7 @@ let TopColumn = {
     },
     template:
         "<el-menu mode=\"horizontal\" background-color=\"#545c64\" text-color=\"#fff\" active-text-color=\"#82EBFF\">\n" +
-        "        <el-menu-item index=\"1\">\n" +
+        "        <el-menu-item index=\"1\" v-on:click='goHome()'>\n" +
         "            <img src=\"/img/img_logo.jpg\" class=\"img-circle\" style=\"width: 60px\" alt=\"\">\n" +
         "            <span style=\"font-size: 20px\">数据共享平台</span>\n" +
         "        </el-menu-item>\n" +

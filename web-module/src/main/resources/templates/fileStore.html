@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>数据共享平台</title>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css"/>
+    <link rel="icon" href="/img/favicon.ico"/>
+    <script src="/js/jquery/jquery.js"></script>
+    <script src="/js/vue/vue.min.js"></script>
+    <script src="/element-ui/lib/index.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/utils/jwt_utils.js"></script>
+    <script src="/js/components/top_column.js"></script>
+    <script src="/js/components/data_card.js"></script>
+</head>
+<body>
+<div id="app">
+    <top-column :username="this.username"></top-column>
+    <div class="jumbotron">
+        <h2 class="text-primary align-top">数据仓库</h2>
+        <p><el-button type="text" style="color: red" v-on:click="show_protocol()">sharing平台数据使用协议</el-button></p>
+        <div v-if="user != null" class="btn btn-lg btn-info" v-on:click="goUploadFile()">
+            上传数据
+        </div>
+    </div>
+    <data-card style="width: 40%" class="center-block" v-bind:key="dataFile.fileId" v-for="dataFile in dataFileInfo" v-bind:data-file-info="dataFile"></data-card>
+    <!--底部导航条-->
+    <div class="bg-info row navbar-fixed-bottom">
+        <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>-->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">copyright: godder@swu 2019</div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">地址:重庆市北碚区西南大学</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 h5">数据共享平台</div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="/css/vue/default.css"/>
+<script>
+    (function (win) {
+        let app = new Vue({
+            el: '#app',
+            name: 'app',
+            components: {
+                DataCard,
+                TopColumn,
+            },
+            data() {
+                return {
+                    user: null,
+                    username: '',
+                    agree_data_protocol: false,
+                    dataFileInfo: [{
+                        fileId: 1,
+                        fileName: '电能表记录时序电功耗（1997-2019）',
+                        info: '记录从1997年到2019年每天48各时序点的电功耗，由多个excel文件组成',
+                        tag: 'hot',
+                        level: 4.6,
+                        fields: [{fieldName: '工程', fieldId: 1}, {fieldName: '电学', fieldId: 2}]
+                    },
+                        {
+                            fileId: 1,
+                            fileName: 'title',
+                            info: 'this is info',
+                            level: 3.3,
+                            tag: 'new',
+                            fields: [{fieldName: 'field', fieldId: 1}, {fieldName: 'field2', fieldId: 2}]
+                        }]
+                }
+
+            },
+            created() {
+                // 判断是否签订了协议
+                this.agree_data_protocol = JSON.parse(localStorage.getItem("agree_data_protocol"))
+                const user = getUser();
+                if (user != null) {
+                    this.user = user;
+                    this.username = user['userName']
+                    this.agree_data_protocol = true;
+                }
+
+            },
+            mounted() {
+                if (!this.agree_data_protocol) {
+                    this.$notify({
+                        title: '未同意数据协议',
+                        message: "若不同意协议内容则部分操作无法进行",
+                        duration: 0,
+                        type: 'warning'
+                    })
+                }
+            },
+            methods: {
+                show_protocol: function () {
+                    this.$confirm(
+                        '<p>尊敬的客户，欢迎您注册成为本网站用户，在注册前请仔细阅读如下服务条款： “恒易融”网站（www.hengyirong.com，以下简称“恒易融”或“本网站”）由北京恒昌利通投资管理有限公司(以下简称“本公司”)运营管 理，并根据本协议的规定向恒易融用户提供服务。本协议双方为恒易融用户与本公司，适用于用户注册使用本网站服务的全部活动。</p><br></br>' +
+                        '<p>在注册本网站之前，请您务必认真阅读并充分理解本协议全部内容。您点击本协议下方的“注册”按钮，并按照本网站注册程序成功成为注册为用户 ，即视为您已经充分理解和同意本协议全部内容，并签署了本协议，本协议立即在您与本公司之间产生合同法律效力，您使用本网站服务的全部活动将受到本协议的 约束并应承担相应的责任和义务。</p>' +
+                        '<p><b>1、协议组成说明</b></p>' +
+                        '<p>1.1 本协议的内容包括本协议以下全部条款以及本网站已经公示发布的及将来可能公示发布的各项规则，该等规则均为本协议不可分割的一部分，与本协议以下所列条款具有同等法律效力。</p>',
+                        'sharing平台数据使用协议',
+                        {
+                            dangerouslyUseHTMLString: true,
+                            confirmButtonText: '同意上述条款',
+                            cancelButtonText: '取消',
+                        }
+                    ).then(() => {
+                        localStorage.setItem("agree_data_protocol", true.toString());
+                        this.agree_data_protocol = true;
+                        this.$message({
+                            type: 'success',
+                            message: '已允许数据下载上传'
+                        });
+                    }).catch(() => {
+                        this.$message.error({
+                            type: 'danger',
+                            message: '禁止数据下载上传'
+                        });
+                        this.$notify.error({
+                            title: '未同意数据协议',
+                            message: "若不同意协议内容则部分操作无法进行",
+                            duration: 0,
+                        });
+                    })
+                },
+                goUploadFile: function () {
+                    window.location.href = "";
+                }
+            }
+        })
+    })(window||{})
+</script>
+</html>
