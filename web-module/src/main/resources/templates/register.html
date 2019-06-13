@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>数据共享平台</title>
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" href="/element-ui/lib/theme-chalk/index.css"/>
+    <link rel="stylesheet" href="/css/verify.css"/>
+    <link rel="icon" href="/img/favicon.ico"/>
+    <script src="/js/jquery/jquery.js"></script>
+    <script src="/js/vue/vue.min.js"></script>
+    <script src="/element-ui/lib/index.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/verify.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="logo">
+        <a href="/">
+            <img src="/img/img_logo.jpg" style="width: 100px;" class="img-circle"/>
+            <img src="/img/text_logo.png"/>
+        </a>
+    </div>
+    <el-card class="center-block" style="width: 40%">
+        <div slot="header">
+            <h3>用户注册</h3>
+        </div>
+        <el-form label-width="10%">
+            <el-form-item label="用户名">
+                <el-input v-model="userForm.userName"></el-input>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input type="password" v-model="userForm.password"></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码">
+                <el-input type="password" v-model="requirePassword"></el-input>
+            </el-form-item>
+            <el-form-item label="验证码">
+                <div id="verify" class="verify-bar-area"></div>
+            </el-form-item>
+            <el-form-item label-width="0">
+                <el-button type="primary" class="btn btn-success" style="width: 80%" :disabled="verify" v-on:click="register">注册</el-button>
+            </el-form-item>
+        </el-form>
+    </el-card>
+    <!--底部导航条-->
+    <div class="bg-info row navbar-fixed-bottom">
+        <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>-->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">copyright: godder@swu 2019</div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 h5">地址:重庆市北碚区西南大学</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 h5">数据共享平台</div>
+    </div>
+</div>
+</body>
+<link rel="stylesheet" href="/css/vue/default.css"/>
+<style>
+    #app {
+        margin-top: 60px;
+    }
+</style>
+<script>
+    (function (win) {
+        let app = new Vue({
+            name: 'app',
+            el: '#app',
+            components: {
+            },
+            data(){
+                return {
+                    userForm: {
+                        userName: "",
+                        password: "",
+                    },
+                    requirePassword: "",
+                    verify: false,
+                }
+            },
+            mounted() {
+                $('#verify').slideVerify({
+                    type : 1,		//类型
+                    vOffset : 5,	//误差量，根据需求自行调整
+                    barSize : {
+                        width : '100%',
+                        height : '40px',
+                    },
+                    ready : function() {
+                    },
+                    success : function() {
+                        v = false;
+                        //......后续操作
+                    },
+                    error : function() {
+//		        	alert('验证失败！');
+                    }
+                });
+            },
+            methods: {
+                register: function () {
+                    let status = -2;
+                    let message = "";
+                    $.post({
+                        url: '',
+                        data: this.userForm,
+                        dataType: 'json',
+                        success: function (data) {
+                            status = data.status;
+                            //success
+                            if (data.status == 0) {
+
+                                window.location.href = "/";
+                            }
+                            if (data.status == 1) {
+                                message = data.message;
+                            }
+                        },
+                        error: function () {
+                            status = -1;
+                        }
+                    });
+                    if (status == -1) {
+                        this.$notify.error({
+                            title: '网络连接异常',
+                            message: "无法连接服务器，请检查网络连接状态",
+                            duration: 0,
+                        })
+                    }
+                    if (status == 1) {
+                        this.$notify.error({
+                            title: '用户名已被注册',
+                            message: "当前用户名已被注册，请更换用户名",
+                            duration: 0,
+                        })
+                    }
+                }
+            }
+        })
+    })(window||{})
+</script>
+</html>
