@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamodule.application.service.FileService;
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.entity.FileStore;
 import top.godder.datamoduleapi.domain.vo.DataFileReq;
 import top.godder.datamoduleapi.service.FileApi;
 
@@ -66,6 +67,11 @@ public class FileRest implements FileApi {
     @Override
     public List<DataFile> userBuyList(@RequestBody Long userId) {
         return fileService.buyList(userId);
+    }
+
+    @Override
+    public List<FileStore> getFileStore(@RequestBody Long fileId) {
+        return fileService.getFileStore(fileId);
     }
 
     @Override

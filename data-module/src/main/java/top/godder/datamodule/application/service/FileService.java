@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamodule.domain.dao.DataFileDao;
+import top.godder.datamodule.domain.dao.FileStoreDao;
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.entity.FileStore;
 import top.godder.datamoduleapi.domain.vo.DataFileReq;
 import top.godder.infrastructurecommon.util.RedisUtil;
 
@@ -30,6 +32,8 @@ public class FileService {
 
     @Autowired
     private DataFileDao dataFileDao;
+    @Autowired
+    private FileStoreDao fileStoreDao;
     @Autowired
     private RedisUtil redisUtil;
 
@@ -98,6 +102,13 @@ public class FileService {
             return false;
         }
         return dataFileDao.userBuyFile(fileId, userId);
+    }
+
+    public List<FileStore> getFileStore(Long fileId) {
+        if (fileId == null) {
+            return null;
+        }
+        return fileStoreDao.findFileStoreByFileId(fileId);
     }
 
 //    public boolean insertDataFileRedis(DataFile dataFile) {
@@ -189,12 +200,18 @@ public class FileService {
         for (MultipartFile file : files) {
             String name = file.getName();
             File dest = new File(dir + name);
+            FileStore fileStore = FileStore.builder()
+                    .fileId(fileId)
+                    .fileName(name)
+                    .fileSize((int) file.getSize())
+                    .build();
             try {
                 file.transferTo(dest);
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
             }
+            fileStoreDao.insertFileStore(fileStore);
         }
         return true;
     }

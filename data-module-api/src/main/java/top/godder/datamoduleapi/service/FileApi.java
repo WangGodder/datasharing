@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamoduleapi.config.MultipartSupportConfig;
 import top.godder.datamoduleapi.domain.entity.DataFile;
+import top.godder.datamoduleapi.domain.entity.FileStore;
 import top.godder.datamoduleapi.domain.vo.DataFileReq;
 
 import java.util.List;
@@ -82,6 +83,10 @@ public interface FileApi {
      */
     @PostMapping(value = Urls.FileApi.USER_BUY_LIST)
     List<DataFile> userBuyList(Long userId);
+
+
+    @PostMapping(value = Urls.FileApi.GET_FILE_STORE)
+    List<FileStore> getFileStore(Long fileId);
 
 
     @PostMapping(value = Urls.FileApi.FILE_DOWNLOAD_CREDIT)

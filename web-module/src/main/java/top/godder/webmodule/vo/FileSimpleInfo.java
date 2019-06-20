@@ -5,6 +5,7 @@ import lombok.Data;
 import top.godder.datamoduleapi.domain.entity.DataFile;
 import top.godder.datamoduleapi.domain.entity.Field;
 import top.godder.datamoduleapi.domain.entity.FileComment;
+import top.godder.datamoduleapi.domain.entity.FileStore;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public class FileSimpleInfo {
     private Float level;
     private List<Field> fieldList;
     private List<FileComment> commentList;
+    private List<FileStore> fileStoreList;
 }

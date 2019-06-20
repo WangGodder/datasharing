@@ -8,6 +8,7 @@ import top.godder.datamoduleapi.domain.aggregate.UserBaseInfo;
 import top.godder.datamoduleapi.domain.entity.DataFile;
 import top.godder.datamoduleapi.domain.entity.Field;
 import top.godder.datamoduleapi.domain.entity.FileComment;
+import top.godder.datamoduleapi.domain.entity.FileStore;
 import top.godder.datamoduleapi.service.FieldApi;
 import top.godder.datamoduleapi.service.FileApi;
 import top.godder.datamoduleapi.service.FileCommentApi;
@@ -64,12 +65,14 @@ public class DataFileService {
         List<Field> fieldList = fieldApi.getFieldByFile(fileId);
         Float level = fileCommentApi.getAvgLevel(fileId);
         List<FileComment> comments = fileCommentApi.getCommentByFile(fileId);
+        List<FileStore> fileStores = fileApi.getFileStore(fileId);
         FileSimpleInfo fileSimpleInfo = FileSimpleInfo.builder()
                 .file(dataFile)
                 .uploaderName(uploaderName)
                 .downloadCredit(downloadCredit)
                 .fieldList(fieldList).level(level)
                 .commentList(comments)
+                .fileStoreList(fileStores)
                 .build();
         return fileSimpleInfo;
     }
