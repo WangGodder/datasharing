@@ -68,7 +68,7 @@ public class UserTkRepository {
         }
         String newPs = (String)userTkMap.get("newPs");
         Long userId = getUserId(userTk);
-        if (userId == -1l) {
+        if (userId == -1L) {
             return false;
         }
         userTk = new UserTk(userId, userTk.getUserName(), MD5.md5(newPs));
@@ -87,5 +87,26 @@ public class UserTkRepository {
             return false;
         }
         return userTkDao.deleteUserTk(userTk) == 1;
+    }
+
+    public boolean userNameEixst(String userName) {
+        if (userName == null || userName.isEmpty()) {
+            return false;
+        }
+        if (userTkDao.findUserTkByUserName(userName) == null) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getUserName(Long userId) {
+        if (userId == null) {
+            return null;
+        }
+        String name = userTkDao.findUserName(userId);
+        if (name == null || name.isEmpty()) {
+            return null;
+        }
+        return name;
     }
 }

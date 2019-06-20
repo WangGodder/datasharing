@@ -20,6 +20,7 @@ import java.util.List;
 @Builder
 public class UserBaseInfo {
     private Long userId;
+    private String userName;
     private String localName;
     private int credit;
     private List<Field> fieldList;

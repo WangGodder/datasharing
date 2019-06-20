@@ -26,9 +26,28 @@ public interface LoginApi {
     @RequestMapping(value = Urls.UserTkApiUrl.REGISTER, method = POST)
     Long register( UserTk userTk);
 
+    /**
+     * 检测用户名是否存在
+     * @param userName 检测用户名
+     * @return 是否存在
+     */
+    @RequestMapping(value = Urls.UserTkApiUrl.USER_NAME_EXIST, method = POST)
+    boolean userNameExist(String userName);
+
+    /**
+     * 修改用户密码
+     * @param userTkMap 包含用户名，用户新密码，用户旧密码
+     * @return 是否修改成功
+     */
     @RequestMapping(value = Urls.UserTkApiUrl.UPDATE_USER_TK, method = POST)
     boolean updatePs( Map<String, Object> userTkMap);
 
+    /**
+     * 删除用户
+     * @param userTk 用户名，用户密码
+     * @return 是否删除成功
+     */
     @RequestMapping(value = Urls.UserTkApiUrl.DELETE_USER_TK, method = POST)
     boolean deleteUserTk( UserTk userTk);
+
 }

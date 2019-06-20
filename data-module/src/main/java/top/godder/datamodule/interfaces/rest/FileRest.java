@@ -2,6 +2,9 @@ package top.godder.datamodule.interfaces.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import top.godder.datamodule.application.service.FileService;
@@ -29,44 +32,49 @@ public class FileRest implements FileApi {
     }
 
     @Override
-    public List<DataFile> getDataFileByUser(Long userId) {
+    public List<DataFile> getDataFileByUser(@RequestBody Long userId) {
         return fileService.getDataFileByUser(userId);
     }
 
     @Override
-    public List<DataFile> getDataFileByField(Long fieldId) {
+    public List<DataFile> getDataFileByField(@RequestBody Long fieldId) {
         return fileService.getDataFileByField(fieldId);
     }
 
     @Override
-    public DataFile getDataFile(Long fileId) {
+    public DataFile getDataFile(@RequestBody Long fileId) {
         return fileService.getDataFile(fileId);
     }
 
     @Override
-    public List<DataFile> getDataFileByReq(DataFileReq req) {
+    public List<DataFile> getDataFileByReq(@RequestBody DataFileReq req) {
         return fileService.getDataFileByReq(req);
     }
 
     @Override
-    public List<String> getDataFileNameList(Long fileId) {
+    public List<String> getDataFileNameList(@RequestBody Long fileId) {
         return fileService.getDataFileNameList(fileId);
     }
 
     @Override
-    public boolean userHasBuy(Map<String, Long> map) {
+    public boolean userHasBuy(@RequestBody Map<String, Long> map) {
         Long fileId = map.get("fileId");
         Long userId = map.get("userId");
         return fileService.fileBuy(fileId, userId);
     }
 
     @Override
-    public List<DataFile> userBuyList(Long userId) {
+    public List<DataFile> userBuyList(@RequestBody Long userId) {
         return fileService.buyList(userId);
     }
 
     @Override
-    public boolean uploadDataFile(MultipartFile[] files, DataFile dataFile) {
+    public Integer fileDownloadCredit(@RequestBody Long fileId) {
+        return fileService.getFileCredit(fileId);
+    }
+
+    @Override
+    public boolean uploadDataFile(@RequestPart(value = "file") MultipartFile[] files, @RequestParam(value = "dataFile") DataFile dataFile) {
         if (!fileService.insertDataFile(dataFile)) {
             return false;
         }
@@ -74,14 +82,21 @@ public class FileRest implements FileApi {
         return fileService.uploadDataFile(files, fileId);
     }
 
+    @Override
+    public boolean userBuyFile(@RequestBody Map<String, Long> map) {
+        Long fileId = map.get("fileId");
+        Long userId = map.get("userId");
+        return fileService.userBuy(fileId, userId);
+    }
+
 
     @Override
-    public boolean deleteDataFile(Long fileId) {
+    public boolean deleteDataFile(@RequestBody Long fileId) {
         return fileService.deleteDataFile(fileId);
     }
 
     @Override
-    public ResponseEntity downloadDataFile(Map<String, Object> map) {
+    public ResponseEntity downloadDataFile(@RequestBody Map<String, Object> map) {
         Long fileId = (Long) map.get("fileId");
         String fileName = (String) map.get("fileName");
         HttpServletRequest request = (HttpServletRequest) map.get("request");

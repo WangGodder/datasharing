@@ -20,4 +20,12 @@ public class LoginController {
     public JsonResult login(@RequestParam("username") String userName, @RequestParam("password") String password) {
         return loginService.login(userName, password);
     }
+
+    @PostMapping(value = "/user/register")
+    public JsonResult register(@RequestParam("userName") String userName, @RequestParam("password") String password) {
+        if (userName == null || userName.isEmpty() || password == null || password.isEmpty()) {
+            return JsonResult.fail("userName and password sholud be empty");
+        }
+        return loginService.register(userName, password);
+    }
 }

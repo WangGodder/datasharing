@@ -29,7 +29,7 @@ let login_board = {
                     title: "错误"
                 });
             }
-            let data = {};
+            let status = 0;
             $.ajax({
                 url: this.service_url,
                 type: 'POST',
@@ -46,10 +46,10 @@ let login_board = {
                         window.location.href = "/";
                         return;
                     }
-                    data =  return_data;
+                    status = return_data.status;
                 },
                 error: function () {
-                    data.status = 5;
+                    status = 5;
 
                     // $.notify({
                     //     title: "<strong>网络环境问题</strong>",
@@ -60,13 +60,13 @@ let login_board = {
                 }
             });
             // wrong
-            if (data.status == 5) {
+            if (status === 5) {
                 this.$notify.error({
                     title: "网络环境问题",
                     message: "网络环境不稳定，请确保网络连接",
                 })
             }
-            if (data.status == 4) {
+            if (status === 4) {
                 this.password = '';
                 $.notify({
                     message: data.message,
@@ -80,7 +80,7 @@ let login_board = {
                     }
                 );
             }
-            if (data.status == 2) {
+            if (status === 2) {
                 $.notify({
                     title: "<strong>连接错误</strong>",
                     message: data.message,
@@ -88,7 +88,7 @@ let login_board = {
                     type: "danger"
                 })
             }
-            if (data.status == 3) {
+            if (status === 3) {
                 $.notify({
                     title: "<strong>连接错误</strong>",
                     message: data.message,

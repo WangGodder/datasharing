@@ -1,6 +1,7 @@
 package top.godder.usermodule.interfaces.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import top.godder.usermodule.application.service.UserService;
 import top.godder.usermoduleapi.domain.aggregate.LoginUser;
@@ -20,7 +21,7 @@ public class UserRest implements UserApi {
     private UserService userService;
 
     @Override
-    public UserInfo getUserInfo(Long id) {
+    public UserInfo getUserInfo(@RequestBody Long id) {
         return userService.getUserInfo(id);
     }
 
@@ -30,27 +31,32 @@ public class UserRest implements UserApi {
     }
 
     @Override
-    public List<UserInfo> requestUserInfo(UserInfoReq req) {
+    public List<UserInfo> requestUserInfo(@RequestBody UserInfoReq req) {
         return userService.getUserInfoByReq(req);
     }
 
     @Override
-    public boolean addUserInfo(UserInfo userInfo) {
+    public boolean addUserInfo(@RequestBody UserInfo userInfo) {
         return userService.addUserInfo(userInfo);
     }
 
     @Override
-    public boolean updateUserInfo(UserInfo userInfo) {
+    public boolean updateUserInfo(@RequestBody UserInfo userInfo) {
         return userService.updateUserInfo(userInfo);
     }
 
     @Override
-    public boolean deleteUserInfo(Long id) {
+    public boolean deleteUserInfo(@RequestBody Long id) {
         return userService.deleteUserInfo(id);
     }
 
     @Override
-    public LoginUser getLoginUser(Long userId) {
+    public LoginUser getLoginUser(@RequestBody Long userId) {
         return userService.getLoginUser(userId);
+    }
+
+    @Override
+    public String getUserName(@RequestBody Long userId) {
+        return userService.getUserName(userId);
     }
 }

@@ -49,6 +49,11 @@ public class DataFileDaoImpl implements DataFileDao {
     }
 
     @Override
+    public Integer findCreditByFileId(Long fileId) {
+        return mapper.findCreditByFileId(fileId);
+    }
+
+    @Override
     public List<DataFile> findByUserBuy(Long userId) {
         return mapper.findByUserBuy(userId);
     }
@@ -61,6 +66,11 @@ public class DataFileDaoImpl implements DataFileDao {
     @Override
     public boolean insertOne(DataFile dataFile) {
         return mapper.insertOne(dataFile) == 1;
+    }
+
+    @Override
+    public boolean userBuyFile(Long fileId, Long userId) {
+        return mapper.userBuy(fileId, userId) == 1;
     }
 
     @Override

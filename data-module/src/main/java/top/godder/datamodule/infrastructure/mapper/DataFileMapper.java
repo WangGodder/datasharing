@@ -26,6 +26,8 @@ public interface DataFileMapper extends BaseMapper<DataFile> {
 
     List<DataFile> findByReq(DataFileReq req);
 
+    Integer findCreditByFileId(Long fileId);
+
     List<DataFile> findByUserBuy(Long userId);
 
     boolean buyFile(@Param("fileId") Long fileId, @Param("userId") Long userId);
@@ -35,6 +37,8 @@ public interface DataFileMapper extends BaseMapper<DataFile> {
     Integer countFileId(Long fieldId);
 
     int insertOne(DataFile dataFile);
+
+    int userBuy(@Param("fileId") Long fileId, @Param("userId") Long userId);
 
     int deleteByFileId(Long fileId);
 

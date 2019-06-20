@@ -27,10 +27,10 @@ public interface SystemLoginApi {
     String login(@RequestBody SystemLoginReq systemLoginReq);
 
     /**
-     * 新用户注册初始化本地信息，创建UserLocalInfo，同时给予初始积分，和赋予用户角色
-     * @param userId 新注册ID
-     * @return 是否初始化成功
+     * 注册新用户同时注册初始化本地信息，创建UserLocalInfo，同时给予初始积分，和赋予用户角色
+     * @param userTkMap: 新注册用户名和密码
+     * @return 新用户的jwt
      */
     @RequestMapping(value = Urls.LoginApi.REGISTER, method = POST)
-    boolean register(@RequestBody Long userId);
+    String register(Map<String, String> userTkMap);
 }

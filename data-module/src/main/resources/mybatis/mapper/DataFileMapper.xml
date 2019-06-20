@@ -59,11 +59,18 @@
         </if>
       </where>
     </select>
+
     <select id="findByUserBuy" resultMap="BaseResultMap" parameterType="long">
       select * from file where (select file_id from user_buy_file where file.user_id = #{userId,jdbcType=BIGINT} order by buy_time) = file_id
     </select>
   <select id="buyFile" resultType="boolean" parameterType="map">
     select count(*) from user_buy_file where user_id = #{userId,jdbcType=BIGINT} and file_id = #{fileId,jdbcType=BIGINT}
   </select>
+  <select id="findCreditByFileId" parameterType="long" resultType="java.lang.Integer">
+    select credit from file_credit where fileId = #{fileId,jdbcType=BIGINT}
+  </select>
+  <insert id="userBuy" parameterType="map">
+    insert into user_buy_file (file_id, user_id) values (#{fileId,jdbcType=BIGINT} ,#{userId,jdbcType=BIGINT} )
+  </insert>
 
 </mapper>

@@ -10,6 +10,8 @@ import top.godder.usermoduleapi.domain.entity.UserTk;
 public interface UserTkDao {
     UserTk findUserTkByUserName(String userName);
 
+    String findUserName(Long userId);
+
     boolean addUserTk(UserTk userTk);
 
     Integer updateUserTk(UserTk userTk);

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="app">
-    <top-column :username="this.username"></top-column>
+    <top-column :username="this.username" :userId="this.userId"></top-column>
     <div class="jumbotron">
         <h2 class="text-primary align-top">数据仓库</h2>
         <p><el-button type="text" style="color: red" v-on:click="show_protocol()">sharing平台数据使用协议</el-button></p>
@@ -48,6 +48,7 @@
                 return {
                     user: null,
                     username: '',
+                    userId: null,
                     agree_data_protocol: false,
                     dataFileInfo: [{
                         fileId: 1,
@@ -74,7 +75,8 @@
                 const user = getUser();
                 if (user != null) {
                     this.user = user;
-                    this.username = user['userName']
+                    this.username = user['userName'];
+                    this.userId = user['userId'];
                     this.agree_data_protocol = true;
                 }
 

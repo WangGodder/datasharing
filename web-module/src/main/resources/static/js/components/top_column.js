@@ -4,6 +4,9 @@ let TopColumn = {
         username: {
             type: String,
             default: ''
+        },
+        userId: {
+            default: null
         }
     },
     data() {

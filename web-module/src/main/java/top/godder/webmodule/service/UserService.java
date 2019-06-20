@@ -17,4 +17,5 @@ public class UserService {
     public UserBaseInfo readJwt(String jwt) {
         return userInfoApi.getBaseInfo(jwt);
     }
+
 }

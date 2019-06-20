@@ -22,6 +22,11 @@ public class UserTkDaoImpl implements UserTkDao {
     }
 
     @Override
+    public String findUserName(Long userId) {
+        return mapper.findUserName(userId);
+    }
+
+    @Override
     public boolean addUserTk(UserTk userTk) {
         return mapper.addUserTk(userTk) == 1;
     }

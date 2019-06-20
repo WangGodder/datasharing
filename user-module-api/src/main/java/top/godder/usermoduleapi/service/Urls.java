@@ -14,6 +14,7 @@ public class Urls {
         public static final String REGISTER = "/register";
         public static final String UPDATE_USER_TK = "/changeps";
         public static final String DELETE_USER_TK = "/logout";
+        public static final String USER_NAME_EXIST = "/nameCheck";
     }
 
     public static class UserInfoApiUrl {
@@ -44,5 +45,6 @@ public class Urls {
 
     public static class LoginUserApiUrl {
         public static final String GET_LOGIN_USER = "/user/loginUser";
+        public static final String GET_USER_NAME = "/user/userName";
     }
 }

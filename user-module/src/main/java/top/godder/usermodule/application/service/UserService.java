@@ -2,6 +2,8 @@ package top.godder.usermodule.application.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.godder.usermodule.domain.repository.UserTkRepository;
+import top.godder.usermodule.infrastructure.dao.UserTkDao;
 import top.godder.usermoduleapi.domain.aggregate.LoginUser;
 import top.godder.usermoduleapi.domain.entity.UserInfo;
 import top.godder.usermodule.domain.factory.LoginUserFactory;
@@ -18,6 +20,8 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserInfoRepository userInfoRepository;
+    @Autowired
+    private UserTkRepository userTkRepository;
 
     public UserInfo getUserInfo(Long userId) {
         return userInfoRepository.getUserInfoById(userId);
@@ -45,5 +49,9 @@ public class UserService {
 
     public LoginUser getLoginUser(Long userId) {
         return LoginUserFactory.getLoginUser(userId);
+    }
+
+    public String getUserName(Long userId) {
+        return userTkRepository.getUserName(userId);
     }
 }

@@ -27,11 +27,15 @@ public interface DataFileDao {
 
     List<DataFile> findByReq(DataFileReq req);
 
+    Integer findCreditByFileId(Long fileId);
+
     List<DataFile> findByUserBuy(Long userId);
 
     boolean buyFile(Long fileId, Long userId);
 
     boolean insertOne(DataFile dataFile);
+
+    boolean userBuyFile(Long fileId, Long userId);
 
     boolean deleteByFileId(Long fileId);
 

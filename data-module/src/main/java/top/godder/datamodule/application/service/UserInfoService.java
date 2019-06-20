@@ -8,6 +8,7 @@ import top.godder.datamodule.infrastructure.util.JwtUtil;
 import top.godder.datamoduleapi.domain.aggregate.UserBaseInfo;
 import top.godder.datamoduleapi.domain.entity.UserLocalInfo;
 import top.godder.infrastructurecommon.result.JsonResult;
+import top.godder.usermoduleapi.service.UserApi;
 
 /**
  * @author: godder
@@ -21,12 +22,25 @@ public class UserInfoService {
     private UserLocalInfoDao userLocalInfoDao;
     @Autowired
     private FieldDao fieldDao;
+    @Autowired
+    private UserApi userApi;
 
     public UserBaseInfo getBaseInfo(String jwt) {
         if (jwt == null || jwt.isEmpty()) {
             return null;
         }
         return jwtUtil.verifyJWT(jwt);
+    }
+
+    public String getUserName(Long userId) {
+        if (userId == null) {
+            return null;
+        }
+        String userName = userLocalInfoDao.findOne(userId).getName();
+        if (userName == null || userName.isEmpty()) {
+            userName = userApi.getUserName(userId);
+        }
+        return userName;
     }
 
     public boolean changeName(Long userId, String name) {

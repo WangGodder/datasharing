@@ -1,10 +1,12 @@
 package top.godder.webmodule.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.spring.web.json.Json;
 import top.godder.datamoduleapi.domain.aggregate.UserBaseInfo;
 import top.godder.infrastructurecommon.result.JsonResult;
 import top.godder.webmodule.service.UserService;
@@ -24,6 +26,6 @@ public class UserController {
             return JsonResult.fail("jwt is empty");
         }
         UserBaseInfo userBaseInfo = service.readJwt(jwt);
-        return JsonResult.success(userBaseInfo);
+        return JsonResult.success((Object)JSON.toJSONString(userBaseInfo));
     }
 }

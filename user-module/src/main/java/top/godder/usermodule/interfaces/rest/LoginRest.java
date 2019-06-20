@@ -36,6 +36,11 @@ public class LoginRest implements LoginApi {
     }
 
     @Override
+    public boolean userNameExist(@RequestBody String userName) {
+        return service.userNameExist(userName);
+    }
+
+    @Override
     @RequestMapping(value = Urls.UserTkApiUrl.UPDATE_USER_TK, method = POST)
     public boolean updatePs(@RequestBody Map<String, Object> userTkMap) {
         return service.changePs(userTkMap);

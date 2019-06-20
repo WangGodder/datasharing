@@ -1,7 +1,11 @@
 package top.godder.webmodule.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
+import top.godder.webmodule.service.DataFileService;
 
 /**
  * @author: godder
@@ -54,5 +58,11 @@ public class PageController {
     @GetMapping(value = "/community")
     public String community() {
         return "community";
+    }
+
+
+    @GetMapping(value = "/filePage/{fileId}")
+    public String filePage(@PathVariable("fileId") String fileId) {
+        return "filePage";
     }
 }

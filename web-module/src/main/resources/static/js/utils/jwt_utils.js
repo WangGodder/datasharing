@@ -21,7 +21,7 @@ function storeUser(user) {
 
 function getUser() {
     if (sessionStorage.hasOwnProperty('user')) {
-        let jwtStr = localStorage.getItem('user');
+        let jwtStr = sessionStorage.getItem('user');
         return JSON.parse(jwtStr);
     }
     return null;

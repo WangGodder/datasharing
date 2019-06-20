@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="app">
-    <top-column :username="this.username"></top-column>
+    <top-column :username="this.username" :userId="this.userId"></top-column>
     <notice_board style="margin-top: 2%" v-bind:notice_info="this.notice_info"></notice_board>
 
 
@@ -45,8 +45,9 @@
                         {'img_url': "/img/slide.svg", 'url_jump': 'github.com'},
                         {'img_url': "/img/slide.svg", 'url_jump': 'github.com'}
                     ],
-                    username: '',
                     user: null,
+                    username: '',
+                    userId: null,
                 }
             },
             created() {
@@ -71,9 +72,10 @@
                         url: '/user/verifyJwt',
                         data: {'jwt': jwt},
                         dataType: 'json',
+                        async: false,
                         success: function (data) {
                             if (data.status == 0) {
-                                user = data.object;
+                                user = data.data;
                                 sessionStorage.setItem("user", user);
                             }
                             if (data.status == 1) {
@@ -84,8 +86,12 @@
                             fali_case = 1
                         }
                     })
-                    this.user = user;
-                    this.username = user['userName'];
+                    this.user = JSON.parse(user);
+                    console.log(this.user);
+                    this.username = this.user['userName'];
+                    console.log(this.username);
+                    this.userId = this.user['userId'];
+                    storeUser(this.user);
                     if (fali_case === 1) {
                         this.check_connect()
                     }

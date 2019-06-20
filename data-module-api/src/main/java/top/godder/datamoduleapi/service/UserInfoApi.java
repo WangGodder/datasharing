@@ -24,6 +24,9 @@ public interface UserInfoApi {
     @RequestMapping(value = Urls.UserInfoApi.GET_BASE_INFO, method = POST)
     UserBaseInfo getBaseInfo(String jwt);
 
+    @RequestMapping(value = Urls.UserInfoApi.GET_USER_NAME, method = POST)
+    String getUserName(Long userId);
+
     /**
      * 修改系统用户名称
      * @param req 记录用户ID和修改的新名称

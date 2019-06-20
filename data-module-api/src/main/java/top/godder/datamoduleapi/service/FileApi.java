@@ -83,6 +83,10 @@ public interface FileApi {
     @PostMapping(value = Urls.FileApi.USER_BUY_LIST)
     List<DataFile> userBuyList(Long userId);
 
+
+    @PostMapping(value = Urls.FileApi.FILE_DOWNLOAD_CREDIT)
+    Integer fileDownloadCredit(Long fileId);
+
     /**
      * 上传数据文件并添加相关数据库信息
      * @param files
@@ -91,6 +95,10 @@ public interface FileApi {
      */
     @PostMapping(value = Urls.FileApi.UPLOAD_DATA_FILE, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     boolean uploadDataFile(@RequestPart(value = "file") MultipartFile[] files, @RequestParam(value = "dataFile") DataFile dataFile);
+
+
+    @PostMapping(value = Urls.FileApi.USER_BUY_FILE)
+    boolean userBuyFile(Map<String, Long> map);
 
     /**
      * 删除数据文件,和相关信息

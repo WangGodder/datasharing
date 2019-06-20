@@ -31,4 +31,8 @@ public class LoginService {
     public boolean logout(UserTk userTk) {
         return userTkRepository.logout(userTk);
     }
+
+    public boolean userNameExist(String userName) {
+        return userTkRepository.userNameEixst(userName);
+    }
 }

@@ -44,20 +44,24 @@ public class LoginService {
         return jwt;
     }
 
-    public boolean register(Long userId) {
+    public String register(String userName, String password) {
+        UserTk userTk = new UserTk(userName, password);
+        Long userId = loginApi.register(userTk);
         UserLocalInfo localInfo = userLocalInfoDao.findOne(userId);
         List<Role> roles = roleDao.findByUserId(userId);
         if (localInfo == null) {
             UserLocalInfo userLocalInfo = UserLocalInfo.builder().userId(userId).credit(10).build();
             if (!userLocalInfoDao.insertOne(userLocalInfo)) {
-                return false;
+                return "wrong";
             }
         }
         if (roles.size() == 0 || roles == null) {
             if (!roleDao.insertUserRole(1L, userId)) {
-                return false;
+                return "wrong";
             }
         }
-        return true;
+
+        String jwt = jwtUtil.createJWT(userTk);
+        return jwt;
     }
 }

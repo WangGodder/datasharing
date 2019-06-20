@@ -12,6 +12,7 @@ import top.godder.datamoduleapi.service.FieldApi;
 import top.godder.datamoduleapi.service.FileApi;
 import top.godder.datamoduleapi.service.FileCommentApi;
 import top.godder.datamoduleapi.service.UserInfoApi;
+import top.godder.infrastructurecommon.result.JsonResult;
 import top.godder.webmodule.vo.FileSimpleInfo;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,8 +56,22 @@ public class DataFileService {
 
     public FileSimpleInfo getFileSimpleInfo(Long fileId) {
         DataFile dataFile = fileApi.getDataFile(fileId);
+        if (dataFile == null) {
+            return null;
+        }
+        String uploaderName = userInfoApi.getUserName(dataFile.getUserId());
+        Integer downloadCredit = fileApi.fileDownloadCredit(fileId);
         List<Field> fieldList = fieldApi.getFieldByFile(fileId);
         Float level = fileCommentApi.getAvgLevel(fileId);
-        return null;
+        List<FileComment> comments = fileCommentApi.getCommentByFile(fileId);
+        FileSimpleInfo fileSimpleInfo = FileSimpleInfo.builder()
+                .file(dataFile)
+                .uploaderName(uploaderName)
+                .downloadCredit(downloadCredit)
+                .fieldList(fieldList).level(level)
+                .commentList(comments)
+                .build();
+        return fileSimpleInfo;
     }
+
 }

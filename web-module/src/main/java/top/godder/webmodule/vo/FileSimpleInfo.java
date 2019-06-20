@@ -1,7 +1,10 @@
 package top.godder.webmodule.vo;
 
+import lombok.Builder;
 import lombok.Data;
+import top.godder.datamoduleapi.domain.entity.DataFile;
 import top.godder.datamoduleapi.domain.entity.Field;
+import top.godder.datamoduleapi.domain.entity.FileComment;
 
 import java.util.List;
 
@@ -10,10 +13,12 @@ import java.util.List;
  * @date: 2019/5/24
  */
 @Data
+@Builder
 public class FileSimpleInfo {
-    private Long fileId;
-    private String fileName;
-    private String info;
+    private DataFile file;
+    private String uploaderName;
+    private Integer downloadCredit;
     private Float level;
-    private List<FileFieldInfo> fieldList;
+    private List<Field> fieldList;
+    private List<FileComment> commentList;
 }

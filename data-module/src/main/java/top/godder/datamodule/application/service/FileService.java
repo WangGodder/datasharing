@@ -65,6 +65,13 @@ public class FileService {
         return dataFileDao.findByReq(req);
     }
 
+    public Integer getFileCredit(Long fileId) {
+        if (fileId == null) {
+            return null;
+        }
+        return dataFileDao.findCreditByFileId(fileId);
+    }
+
     public boolean fileBuy(Long fileId, Long userId) {
         if (userId == null || fileId == null) {
             return false;
@@ -84,6 +91,13 @@ public class FileService {
             return false;
         }
         return dataFileDao.insertOne(dataFile);
+    }
+
+    public boolean userBuy(Long fileId, Long userId) {
+        if (userId == null || fileId == null) {
+            return false;
+        }
+        return dataFileDao.userBuyFile(fileId, userId);
     }
 
 //    public boolean insertDataFileRedis(DataFile dataFile) {

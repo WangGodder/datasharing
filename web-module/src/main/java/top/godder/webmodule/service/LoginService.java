@@ -36,4 +36,18 @@ public class LoginService {
         }
         return JsonResult.success((Object)jwt);
     }
+
+    public JsonResult register(String userName, String password) {
+        Map<String, String> userTkMap = new HashMap<>(2);
+        userTkMap.put("userName", userName);
+        userTkMap.put("password", password);
+        String jwt = systemLoginApi.register(userTkMap);
+        if (SERVER_OUTTIME_JWT.equals(jwt)) {
+            return JsonResult.fail(3,"用户服务连接失败");
+        }
+        if (jwt == null || jwt.isEmpty()) {
+            return JsonResult.fail(4,"用户名、密码错误");
+        }
+        return JsonResult.success((Object)jwt);
+    }
 }

@@ -18,6 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @FeignClient(value = "service-user", url = "${service.service-user}")
 public interface UserApi {
     // user info
+
     @RequestMapping(value = Urls.UserInfoApiUrl.GET_USER_INFO, method = POST)
     UserInfo getUserInfo(@RequestBody Long id);
 
@@ -37,7 +38,11 @@ public interface UserApi {
     boolean deleteUserInfo(@RequestBody Long id);
 
     // login user
+
     @RequestMapping(value = Urls.LoginUserApiUrl.GET_LOGIN_USER, method = POST)
     LoginUser getLoginUser(@RequestBody Long userId);
+
+    @RequestMapping(value = Urls.LoginUserApiUrl.GET_USER_NAME, method = POST)
+    String getUserName(@RequestBody Long userId);
 
 }

@@ -31,6 +31,11 @@ public class UserInfoRest implements UserInfoApi {
     }
 
     @Override
+    public String getUserName(@RequestBody Long userId) {
+        return userInfoService.getUserName(userId);
+    }
+
+    @Override
     @RequestMapping(value = Urls.UserInfoApi.CHANGE_NAME, method = POST)
     public boolean changeName(@RequestBody UserInfoChangeNameReq req) {
         Long userId = req.getUserId();

@@ -21,4 +21,7 @@
     <delete id="deleteUserTk" parameterType="UserTk">
         delete from user_tk where id = #{id, jdbcType=BIGINT} and user_name = #{userName, jdbcType=VARCHAR} and user_ps = #{userPs, jdbcType=VARCHAR};
     </delete>
+    <select id="findUserName" parameterType="long" resultType="java.lang.String">
+    select user_name from user_tk where id = #{userId,jdbcType=BIGINT}
+    </select>
 </mapper>

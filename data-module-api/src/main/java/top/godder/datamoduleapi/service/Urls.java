@@ -16,6 +16,7 @@ public class Urls {
         public static final String CHANGE_CREDIT = "/userInfo/changeCredit";
         public static final String ADD_FIELD = "/userInfo/addField";
         public static final String DELETE_FIELD = "/userInfo/deleteField";
+        public static final String GET_USER_NAME = "/userInfo/getName";
     }
 
     public static class FieldApi {
@@ -34,7 +35,9 @@ public class Urls {
         public static final String GET_DATA_FILE_BY_REQ = "/datafile/getDataFileByReq";
         public static final String USER_HAS_BUY = "/datafile/userHasBuy";
         public static final String USER_BUY_LIST = "/datafile/userBuyList";
+        public static final String FILE_DOWNLOAD_CREDIT = "/datafile/downloadCredit";
         public static final String INSERT_DATA_FILE = "/datafile/insertDataFile";
+        public static final String USER_BUY_FILE = "/datafile/userBuy";
         public static final String DELETE_DATA_FILE = "/datafile/deleteDataFile";
         public static final String GET_DATA_FILE_NAME_LIST = "/datafile/getDataFileNameList";
         public static final String DOWNLOAD_DATA_FILE = "/datafile/downloadDataFile";

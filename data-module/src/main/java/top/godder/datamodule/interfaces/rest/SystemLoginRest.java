@@ -4,11 +4,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.godder.datamodule.application.service.LoginService;
 import top.godder.datamoduleapi.domain.vo.SystemLoginReq;
 import top.godder.datamoduleapi.service.SystemLoginApi;
 
+
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -32,7 +35,9 @@ public class SystemLoginRest implements SystemLoginApi {
 
     @Override
     @RequestMapping(value = Urls.LoginApi.REGISTER, method = POST)
-    public boolean register(@RequestBody Long userId) {
-        return loginService.register(userId);
+    public String register(@RequestBody Map<String, String> userTkMap) {
+        String userName = userTkMap.get("userName");
+        String password = userTkMap.get("password");
+        return loginService.register(userName, password);
     }
 }
